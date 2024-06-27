@@ -6,6 +6,8 @@ import { RegisterService } from '../register.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+// TODO: Ubaciti validacije forme
+// TODO: Ubaciti upload slike
 export class RegisterComponent {
   username?: string;
   // TODO: Lozinku cuvati kao kriptovanu
