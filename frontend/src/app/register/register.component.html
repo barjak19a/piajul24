@@ -4,15 +4,65 @@
           <h1 class="h3 mb-3 fw-normal">Please register</h1>
       
           <div class="form-floating p-2">
-            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" [(ngModel)]="username">
-            <label for="floatingInput">Username</label>
+            <input type="email" class="form-control" id="username" name="username" placeholder="Username" [(ngModel)]="username">
+            <label for="username">Username</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" [(ngModel)]="password">
+            <label for="password">Password</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="text" class="form-control" id="safetyQuestion" name="safetyQuestion" placeholder="Safety Question" [(ngModel)]="safetyQuestion">
+            <label for="safetyQuestion">Safety Question</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="text" class="form-control" id="safetyAnswer" name="safetyAnswer" placeholder="Safety Question Answer" [(ngModel)]="safetyAnswer">
+            <label for="safetyAnswer">Safety Question Answer</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" [(ngModel)]="firstName">
+            <label for="firstName">First Name</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" [(ngModel)]="lastName">
+            <label for="lastName">Last Name</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender" [(ngModel)]="gender">
+            <label for="gender">Gender</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="text" class="form-control" id="address" name="address" placeholder="Address" [(ngModel)]="address">
+            <label for="address">Address</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" [(ngModel)]="phoneNumber">
+            <label for="phoneNumber">Phone Number</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" [(ngModel)]="email">
+            <label for="email">Email</label>
+        </div>
+        <div class="form-floating p-2">
+            <input type="text" class="form-control" id="creditCard" name="creditCard" placeholder="Credit Card" [(ngModel)]="creditCard">
+            <label for="creditCard">Credit Card</label>
+        </div>
+
+        <div class="form-group p-2">
+          <label for="gender" class="form-label">Gender</label>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="male" value="Male" [(ngModel)]="gender">
+              <label class="form-check-label" for="male">Male</label>
           </div>
-          <div class="form-floating p-2">
-            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" [(ngModel)]="password">
-            <label for="floatingPassword">Password</label>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="female" value="Female" [(ngModel)]="gender">
+              <label class="form-check-label" for="female">Female</label>
           </div>
+      </div>
+      
+        
           <div class="mt-2">
-            <button class="w-60 btn btn-lg btn-primary" (click)="register()">Sign in</button>
+            <button class="w-60 btn btn-lg btn-primary" (click)="register()">Register</button>
           </div>
         </form>
     </main>

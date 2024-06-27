@@ -15,6 +15,27 @@ let User = new Schema({
     },
     lastName: {
         type: String
+    },
+    gender: {
+        type: String
+    },
+    safetyQuestion: {
+        type: String
+    },
+    safetyAnswer: {
+        type: String
+    },
+    address: {
+        type: String
+    },
+    phoneNumber: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    creditCard: {
+        type: String
     }
 });
 

@@ -40,7 +40,33 @@ router.route('/login').post((req, res) => {
     
 });
 
+router.route('/register').post((req, res) => {
+    const { username, password, firstName, lastName, gender, safetyQuestion, safetyAnswer, address, phoneNumber, email, creditCard } = req.body;
 
+    const newUser = new user({
+        username,
+        password,
+        firstName,
+        lastName,
+        gender,
+        safetyQuestion,
+        safetyAnswer,
+        address,
+        phoneNumber,
+        email,
+        creditCard
+    });
+
+    newUser.save()
+        .then(user => {
+            console.log('New user created:', user);
+            res.json(user);
+        })
+        .catch(err => {
+            console.error('Error creating user:', err);
+            res.status(500).json({ error: 'Failed to register user. Please try again.' });
+        });
+});
 
 //-----------------------------------------------------------------
 
