@@ -24,6 +24,7 @@ export class RegisterComponent {
 
   constructor(private registerService: RegisterService) {}
 
+  // TODO: check if photo is in 100x100 to 300x300 dimensions range 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
