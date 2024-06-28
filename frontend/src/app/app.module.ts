@@ -10,7 +10,8 @@ import { AdminComponent } from './admin/admin.component';
 import { GuestComponent } from './guest/guest.component';
 import { CustomerComponent } from './customer/customer.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { AdminloginComponent } from './adminLogin/adminlogin.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http'
     WaiterComponent,
     AdminComponent,
     GuestComponent,
-    CustomerComponent
+    CustomerComponent,
+    AdminloginComponent
   ],
   imports: [
     BrowserModule,

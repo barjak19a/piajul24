@@ -36,6 +36,9 @@ let User = new Schema({
     },
     creditCard: {
         type: String
+    },
+    profilePicture: {
+        type: String
     }
 });
 

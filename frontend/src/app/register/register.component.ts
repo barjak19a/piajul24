@@ -6,11 +6,8 @@ import { RegisterService } from '../register.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-// TODO: Ubaciti validacije forme
-// TODO: Ubaciti upload slike
 export class RegisterComponent {
   username?: string;
-  // TODO: Lozinku cuvati kao kriptovanu
   password?: string;
   safetyQuestion?: string;
   safetyAnswer?: string;
@@ -20,12 +17,25 @@ export class RegisterComponent {
   address?: string;
   phoneNumber?: string;
   email?: string;
-  //profilePicture?: File;
+  profilePicture?: string;
   creditCard?: string;
 
   message?: string;
 
   constructor(private registerService: RegisterService) {}
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.profilePicture = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      this.message = 'Invalid file type. Please select a JPG or PNG image.';
+    }
+  }
 
   register(): void {
     const formData = {
@@ -39,10 +49,10 @@ export class RegisterComponent {
       address: this.address,
       phoneNumber: this.phoneNumber,
       email: this.email,
-      creditCard: this.creditCard
+      creditCard: this.creditCard,
+      profilePicture: this.profilePicture
     };
 
-    // Call the register method from the service and handle the response
     this.registerService.register(formData).subscribe(
       (response) => {
         console.log('Registration successful!', response);

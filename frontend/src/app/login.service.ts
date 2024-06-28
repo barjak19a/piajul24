@@ -12,4 +12,7 @@ export class LoginService {
   login(data: any) {
     return this.http.post(`${this.uri}/login`, data);
   }
+  adminlogin(data: any){
+    return this.http.post(`${this.uri}/adminlogin`, data);
+  }
 }

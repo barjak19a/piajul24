@@ -40,8 +40,27 @@ router.route('/login').post((req, res) => {
     
 });
 
+router.route('/adminlogin').post((req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    let data = {
+        username: username,
+        password: password
+    };
+
+    console.log('\n\n/login');
+    console.log(data);
+
+    user.findOne(data).then((user) => {
+        console.log(user);
+        res.json(user);
+    }).catch((err) => console.log(err));
+
+});
+
 router.route('/register').post((req, res) => {
-    const { username, password, firstName, lastName, gender, safetyQuestion, safetyAnswer, address, phoneNumber, email, creditCard } = req.body;
+    const { username, password, firstName, lastName, gender, safetyQuestion, safetyAnswer, address, phoneNumber, email, creditCard, profilePicture } = req.body;
 
     const newUser = new user({
         username,
@@ -54,7 +73,8 @@ router.route('/register').post((req, res) => {
         address,
         phoneNumber,
         email,
-        creditCard
+        creditCard,
+        profilePicture
     });
 
     newUser.save()
