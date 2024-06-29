@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt';
 import user from './model/user'
+import restaurant from './model/restaurant';
 
 
 const app = express()
@@ -116,6 +117,16 @@ router.post('/change-password', async (req, res) => {
     } catch (error) {
       console.error('Error changing password:', error);
       res.status(500).json({ error: 'Failed to change password. Please try again.' });
+    }
+  });
+
+router.get('/restaurants-count', async (req, res) => {
+    try {
+      const count = await restaurant.countDocuments();
+      res.json({ count });
+    } catch (err) {
+      console.error('Error fetching restaurant count:', err);
+      res.status(500).json({ error: 'Failed to fetch restaurant count.' });
     }
   });
 //-----------------------------------------------------------------

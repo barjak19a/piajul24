@@ -1,0 +1,28 @@
+[
+    {
+      "name": "Taste of India",
+      "address": "123 Main St, Cityville",
+      "type": "Indian"
+    },
+    {
+      "name": "Sushi Delight",
+      "address": "456 Oak Ave, Townsville",
+      "type": "Japanese"
+    },
+    {
+      "name": "Golden Dragon",
+      "address": "789 Elm St, Villageton",
+      "type": "Chinese"
+    },
+    {
+      "name": "Mamma Mia Pizzeria",
+      "address": "321 Pine Rd, Suburbia",
+      "type": "Italian"
+    },
+    {
+      "name": "Local BBQ Joint",
+      "address": "555 Hickory Ln, Countryside",
+      "type": "American"
+    }
+  ]
+  
