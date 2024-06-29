@@ -60,7 +60,7 @@ router.route('/adminlogin').post((req, res) => {
 });
 
 router.route('/register').post((req, res) => {
-    const { username, password, firstName, lastName, gender, safetyQuestion, safetyAnswer, address, phoneNumber, email, creditCard, profilePicture } = req.body;
+    const { username, password, firstName, lastName, gender, safetyQuestion, safetyAnswer, address, phoneNumber, email, creditCard, profilePicture, role } = req.body;
 
     const newUser = new user({
         username,
@@ -74,7 +74,8 @@ router.route('/register').post((req, res) => {
         phoneNumber,
         email,
         creditCard,
-        profilePicture
+        profilePicture,
+        role
     });
 
     newUser.save()
@@ -87,6 +88,7 @@ router.route('/register').post((req, res) => {
             res.status(500).json({ error: 'Failed to register user. Please try again.' });
         });
 });
+
 
 //-----------------------------------------------------------------
 

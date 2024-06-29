@@ -50,7 +50,8 @@ export class RegisterComponent {
       phoneNumber: this.phoneNumber,
       email: this.email,
       creditCard: this.creditCard,
-      profilePicture: this.profilePicture
+      profilePicture: this.profilePicture,
+      role: 'guest'
     };
 
     this.registerService.register(formData).subscribe(

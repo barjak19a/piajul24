@@ -39,6 +39,11 @@ let User = new Schema({
     },
     profilePicture: {
         type: String
+    },
+    role: {
+        type: String,
+        enum: ['admin', 'waiter', 'guest'],
+        default: 'guest'
     }
 });
 

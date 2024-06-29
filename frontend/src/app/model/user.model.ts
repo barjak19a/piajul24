@@ -5,9 +5,10 @@ export class User {
     firstName: string = "";
     lastName: string = "";
     gender: string = "";
-    adress: string = "";
-    mobilePhone: string = "";
+    address: string = "";
+    phoneNumber: string = "";
     email: string = "";
-    profilePicture: File | null = null;
+    profilePicture: string = "";
     creditCard: string = "";
+    role: string = "guest";
 }
