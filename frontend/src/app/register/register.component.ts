@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RegisterService } from '../register.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +23,7 @@ export class RegisterComponent {
   message: string = '';
   
 
-  constructor(private registerService: RegisterService) {}
+  constructor(private authService: AuthService) {}
 
   // TODO: check if photo is in 100x100 to 300x300 dimensions range 
   onFileSelected(event: any): void {
@@ -171,7 +171,7 @@ export class RegisterComponent {
       role: 'guest'
     };
 
-    this.registerService.register(formData).subscribe(
+    this.authService.register(formData).subscribe(
       (response) => {
         console.log('Registration successful!', response);
         this.message = 'Registration successful!';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,17 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  
-  username?: string;
-  password?: string;
-  type?: string;
-  message?: string;
+  username: string = '';
+  password: string = '';
+  type: string = '';
+  message: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   login(): void {
     let data = {
@@ -26,12 +23,9 @@ export class LoginComponent implements OnInit{
       password: this.password
     };
 
-    this.loginService.login(data).subscribe((ans) => {
-      console.log(ans);
-      // TODO: Rutiraj se na profilnu stranicu
+    this.authService.login(data).subscribe((ans) => {
       localStorage.setItem('currentUser', JSON.stringify(ans));
-      this.router.navigate(['/change-password']); 
+      this.router.navigate(['/']); 
     });
   }
-
 }

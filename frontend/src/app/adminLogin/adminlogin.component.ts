@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../login.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-admin-login',
@@ -11,7 +11,7 @@ export class AdminloginComponent {
   adminPassword?: string;
   message?: string;
 
-  constructor(private loginservice: LoginService) {}
+  constructor(private authService: AuthService) {}
 
   adminlogin(): void {
     const credentials = {
@@ -19,7 +19,7 @@ export class AdminloginComponent {
       password: this.adminPassword
     };
 
-    this.loginservice.adminlogin(credentials).subscribe(
+    this.authService.adminlogin(credentials).subscribe(
       (response) => {
         console.log('Login successful!', response);
         this.message = 'Login successful!';

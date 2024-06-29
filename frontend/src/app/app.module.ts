@@ -5,10 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { WaiterComponent } from './waiter/waiter.component';
-import { AdminComponent } from './admin/admin.component';
-import { GuestComponent } from './guest/guest.component';
-import { CustomerComponent } from './customer/customer.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminloginComponent } from './adminLogin/adminlogin.component';
@@ -21,10 +17,6 @@ import { HomeComponent } from './home/home.component'
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    WaiterComponent,
-    AdminComponent,
-    GuestComponent,
-    CustomerComponent,
     AdminloginComponent,
     ChangePasswordComponent,
     NavbarComponent,
