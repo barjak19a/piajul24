@@ -10,7 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminloginComponent } from './adminLogin/adminlogin.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component'
     AdminloginComponent,
     ChangePasswordComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
