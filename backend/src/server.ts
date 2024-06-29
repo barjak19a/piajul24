@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt';
 import user from './model/user'
 
 
@@ -22,23 +23,30 @@ const router = express.Router();
 
 //-----------------------------------------------------------------
 router.route('/login').post((req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
+    const { username, password } = req.body;
 
-    let data = {
-        username: username,
-        password: password
-    };
+    user.findOne({ username }).then(user => {
+        if (!user) {
+            return res.status(400).json({ error: 'Invalid username or password' });
+        }
 
-    console.log('\n\n/login');
-    console.log(data);
+        bcrypt.compare(password, user.password || '', (err, isMatch) => {
+            if (err) {
+                return res.status(500).json({ error: 'Internal server error' });
+            }
 
-    user.findOne(data).then((user) => {
-        console.log(user);
-        res.json(user);
-    }).catch((err) => console.log(err));
-    
+            if (!isMatch) {
+                return res.status(400).json({ error: 'Invalid username or password' });
+            }
+
+            res.json(user);
+        });
+    }).catch(err => {
+        console.error('Error during login:', err);
+        res.status(500).json({ error: 'Failed to log in. Please try again.' });
+    });
 });
+
 
 router.route('/adminlogin').post((req, res) => {
     let username = req.body.username;
