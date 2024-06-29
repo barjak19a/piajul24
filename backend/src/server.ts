@@ -97,7 +97,33 @@ router.route('/register').post((req, res) => {
         });
 });
 
-
+router.post('/change-password', async (req, res) => {
+    const { username, currentPassword, newPassword } = req.body;
+  
+    try {
+        console.log(username);
+      const myUser = await user.findOne({username});
+      if (!myUser) {
+        return res.status(404).json({ error: 'User not found.' });
+      }
+  
+      // Check if current password matches
+      const isPasswordValid = await bcrypt.compare(currentPassword, myUser.password || '');
+      if (!isPasswordValid) {
+        return res.status(400).json({ error: 'Current password is incorrect.' });
+      }
+  
+      // Hash the new password and save
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      myUser.password = hashedPassword;
+      await myUser.save();
+  
+      res.json({ message: 'Password changed successfully.' });
+    } catch (error) {
+      console.error('Error changing password:', error);
+      res.status(500).json({ error: 'Failed to change password. Please try again.' });
+    }
+  });
 //-----------------------------------------------------------------
 
 

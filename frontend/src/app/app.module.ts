@@ -11,7 +11,8 @@ import { GuestComponent } from './guest/guest.component';
 import { CustomerComponent } from './customer/customer.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminloginComponent } from './adminLogin/adminlogin.component'
+import { AdminloginComponent } from './adminLogin/adminlogin.component';
+import { ChangePasswordComponent } from './change-password/change-password.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AdminloginComponent } from './adminLogin/adminlogin.component'
     AdminComponent,
     GuestComponent,
     CustomerComponent,
-    AdminloginComponent
+    AdminloginComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

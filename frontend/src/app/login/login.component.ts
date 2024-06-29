@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit{
     this.loginService.login(data).subscribe((ans) => {
       console.log(ans);
       // TODO: Rutiraj se na profilnu stranicu
+      localStorage.setItem('currentUser', JSON.stringify(ans));
+      this.router.navigate(['/change-password']); 
     });
   }
 
