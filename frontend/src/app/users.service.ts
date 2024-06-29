@@ -15,4 +15,9 @@ export class UserService {
     const body = { username, currentPassword, newPassword };
     return this.http.post(url, body);
   }
+
+  getGuestUsersCount(): Observable<any> {
+    const url = `${this.apiUrl}/guest-users-count`;
+    return this.http.get(url);
+  }
 }

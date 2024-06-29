@@ -129,6 +129,16 @@ router.get('/restaurants-count', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch restaurant count.' });
     }
   });
+
+router.get('/guest-users-count', async (req, res) => {
+    try {
+      const count = await user.countDocuments({ role: 'guest' });
+      res.json({ count });
+    } catch (error) {
+      console.error('Error fetching guest users count:', error);
+      res.status(500).json({ error: 'Failed to fetch guest users count' });
+    }
+  });
 //-----------------------------------------------------------------
 
 
