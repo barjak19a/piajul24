@@ -28,15 +28,41 @@ export class RegisterComponent {
   // TODO: check if photo is in 100x100 to 300x300 dimensions range 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
-    if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.profilePicture = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      this.message = 'Invalid file type. Please select a JPG or PNG image.';
+
+    if (!file) {
+      this.message = 'No file selected';
+      return;
     }
+
+    if (!(file.type === 'image/jpeg' || file.type === 'image/png'))
+    {
+      this.message = 'Invalid file type. Please select a JPG or PNG image.';
+      return;
+    }
+
+    const img = new Image();
+    const self = this;
+    img.onload = function() {
+        const width = img.width;
+        const height = img.height;
+
+        if (width >= 100 && width <= 300 && height >= 100 && height <= 300) {
+            self.profilePicture = img.src as string;
+        } else {
+            self.message = 'Photo must be at least 100x100 pixels and not larger than 300x300 pixels';
+        }
+    };
+
+    img.onerror = function() {
+      self.message = 'Invalid image file';
+    };
+
+    const reader = new FileReader();
+    reader.onload = function(e: any) {
+      img.src = e.target.result;
+  };
+
+    reader.readAsDataURL(file);
   }
 
   validateRequiredFields(): boolean {
