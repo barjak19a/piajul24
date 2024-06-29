@@ -22,10 +22,8 @@ export class RegisterComponent {
   
   message: string = '';
   
-
   constructor(private authService: AuthService) {}
 
-  // TODO: check if photo is in 100x100 to 300x300 dimensions range 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
 
@@ -177,6 +175,7 @@ export class RegisterComponent {
     return true;
   }
 
+  //TODO: ubaciti postavljanje defaultne slike ako slika nije izabrana
   register(): void {
     if(!this.validateRequiredFields() || !this.validate())
       return;
