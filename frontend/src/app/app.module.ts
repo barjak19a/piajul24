@@ -13,7 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminloginComponent } from './adminLogin/adminlogin.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { NavbarComponent } from './navbar/navbar.component'
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NavbarComponent } from './navbar/navbar.component'
     CustomerComponent,
     AdminloginComponent,
     ChangePasswordComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
