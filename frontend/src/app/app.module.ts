@@ -12,7 +12,8 @@ import { CustomerComponent } from './customer/customer.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminloginComponent } from './adminLogin/adminlogin.component';
-import { ChangePasswordComponent } from './change-password/change-password.component'
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NavbarComponent } from './navbar/navbar.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     GuestComponent,
     CustomerComponent,
     AdminloginComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,7 @@ const router = express.Router();
 //-----------------------------------------------------------------
 router.route('/login').post((req, res) => {
     const { username, password } = req.body;
-
+    
     user.findOne({ username }).then(user => {
         if (!user) {
             return res.status(400).json({ error: 'Invalid username or password' });
@@ -34,7 +34,7 @@ router.route('/login').post((req, res) => {
             if (err) {
                 return res.status(500).json({ error: 'Internal server error' });
             }
-
+            
             if (!isMatch) {
                 return res.status(400).json({ error: 'Invalid username or password' });
             }
@@ -57,11 +57,7 @@ router.route('/adminlogin').post((req, res) => {
         password: password
     };
 
-    console.log('\n\n/login');
-    console.log(data);
-
     user.findOne(data).then((user) => {
-        console.log(user);
         res.json(user);
     }).catch((err) => console.log(err));
 
@@ -101,7 +97,6 @@ router.post('/change-password', async (req, res) => {
     const { username, currentPassword, newPassword } = req.body;
   
     try {
-        console.log(username);
       const myUser = await user.findOne({username});
       if (!myUser) {
         return res.status(404).json({ error: 'User not found.' });
@@ -114,8 +109,7 @@ router.post('/change-password', async (req, res) => {
       }
   
       // Hash the new password and save
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-      myUser.password = hashedPassword;
+      myUser.password = newPassword;
       await myUser.save();
   
       res.json({ message: 'Password changed successfully.' });
