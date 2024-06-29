@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from '../restaurant.service';
 import { UserService } from '../users.service';
+import { Restaurant } from '../model/restaurant.model';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { UserService } from '../users.service';
 export class HomeComponent implements OnInit {
   restaurantCount: number = 0; // Initialize with default value
   guestUsersCount: number = 0; // Initialize with default value
+  restaurants: Restaurant[] = []; // Array to hold fetched restaurants
 
   constructor(
     private restaurantService: RestaurantService,
@@ -19,6 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.fetchRestaurantCount();
     this.fetchGuestUsersCount();
+    this.fetchAllRestaurants();
   }
 
   fetchRestaurantCount(): void {
@@ -41,6 +44,18 @@ export class HomeComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching guest users count:', error);
+      }
+    );
+  }
+
+  fetchAllRestaurants(): void {
+    this.restaurantService.getAllRestaurants().subscribe(
+      (restaurants) => {
+        this.restaurants = restaurants;
+        console.log('Fetched restaurants:', this.restaurants);
+      },
+      (error) => {
+        console.error('Error fetching restaurants:', error);
       }
     );
   }

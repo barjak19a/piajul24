@@ -139,6 +139,12 @@ router.get('/guest-users-count', async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch guest users count' });
     }
   });
+
+router.route('/get-all-restaurants').get((req, res) => {
+    restaurant.find()
+        .then(restaurants => res.json(restaurants))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 //-----------------------------------------------------------------
 
 

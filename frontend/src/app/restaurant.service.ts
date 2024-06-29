@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Restaurant } from './model/restaurant.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,10 @@ export class RestaurantService {
 
     getRestaurantCount(): Observable<{ count: number }> {
       return this.http.get<{ count: number }>(`${this.apiUrl}/restaurants-count`);
+    }
+
+    getAllRestaurants(): Observable<Restaurant[]> {
+      const url = `${this.apiUrl}/get-all-restaurants`;
+      return this.http.get<Restaurant[]>(url);
     }
 }
