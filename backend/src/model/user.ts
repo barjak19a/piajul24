@@ -20,12 +20,6 @@ let User = new Schema({
     gender: {
         type: String
     },
-    safetyQuestion: {
-        type: String
-    },
-    safetyAnswer: {
-        type: String
-    },
     address: {
         type: String
     },

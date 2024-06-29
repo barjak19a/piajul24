@@ -1,7 +1,6 @@
 export class User {
     username: string = "";
     password: string = "";
-    safetyQuestion: string = "";
     firstName: string = "";
     lastName: string = "";
     gender: string = "";

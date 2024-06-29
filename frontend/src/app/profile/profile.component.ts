@@ -22,6 +22,6 @@ export class ProfileComponent {
   }
 
   editProfile(): void {
-    //this.router.navigate(['/profile-edit']);
+    this.router.navigate(['/profile-edit']);
   }
 }

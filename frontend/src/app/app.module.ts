@@ -11,7 +11,8 @@ import { AdminloginComponent } from './adminLogin/adminlogin.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component'
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProfileComponent } from './profile/profile.component'
     ChangePasswordComponent,
     NavbarComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileEditComponent
   ],
   imports: [
     BrowserModule,

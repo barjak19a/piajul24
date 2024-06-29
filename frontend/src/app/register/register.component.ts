@@ -9,8 +9,6 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent {
   username: string = '';
   password: string = '';
-  safetyQuestion: string = '';
-  safetyAnswer: string = '';
   firstName: string = '';
   lastName: string = '';
   gender: string = '';
@@ -70,14 +68,6 @@ export class RegisterComponent {
     }
     if (!this.password) {
       this.message = 'Password cannot be empty.';
-      return false;
-    }
-    if (!this.safetyQuestion) {
-      this.message = 'Safety question cannot be empty.';
-      return false;
-    }
-    if (!this.safetyAnswer) {
-      this.message = 'Safety answer cannot be empty.';
       return false;
     }
     if (!this.firstName) {
@@ -183,8 +173,6 @@ export class RegisterComponent {
     const formData = {
       username: this.username,
       password: this.password,
-      safetyQuestion: this.safetyQuestion,
-      safetyAnswer: this.safetyAnswer,
       firstName: this.firstName,
       lastName: this.lastName,
       gender: this.gender,
