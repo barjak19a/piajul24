@@ -145,6 +145,35 @@ router.route('/get-all-restaurants').get((req, res) => {
         .then(restaurants => res.json(restaurants))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.put('/update-profile', async (req, res) => {
+  const { id, username, firstName, lastName, gender, address, phoneNumber, email, creditCard, profilePicture } = req.body;
+
+  try {
+    const updatedUser = await user.findOneAndUpdate(
+      { username },
+      {
+        firstName,
+        lastName,
+        gender,
+        address,
+        phoneNumber,
+        email,
+        creditCard,
+        profilePicture
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating user profile', error });
+  }
+});
 //-----------------------------------------------------------------
 
 

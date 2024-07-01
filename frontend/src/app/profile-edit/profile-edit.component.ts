@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../model/user.model';
 import { Router } from '@angular/router';
+import { UserService } from '../users.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -13,7 +14,7 @@ export class ProfileEditComponent {
 
   message: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     const currentUserString = localStorage.getItem('currentUser');
@@ -60,15 +61,22 @@ export class ProfileEditComponent {
     const reader = new FileReader();
     reader.onload = function(e: any) {
       img.src = e.target.result;
-  };
+    };
 
     reader.readAsDataURL(file);
   }
 
   //TODO: Sacuvaj izmenjenog usera na backendu
   saveProfile(): void {
-    localStorage.setItem('currentUser', JSON.stringify(this.editedUser));
-    this.router.navigate(['/profile']);
+    this.userService.updateUser(this.editedUser).subscribe(
+      (response) => {
+        localStorage.setItem('currentUser', JSON.stringify(response));
+        this.router.navigate(['/profile']);
+      },
+      (error) => {
+        console.error('Error updating profile:', error);
+      }
+    );
   }
 
 
