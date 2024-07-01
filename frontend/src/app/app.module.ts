@@ -12,7 +12,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileEditComponent } from './profile-edit/profile-edit.component'
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { AdminComponent } from './admin/admin.component';
+import { WaiterComponent } from './waiter/waiter.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component'
     NavbarComponent,
     HomeComponent,
     ProfileComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    AdminComponent,
+    WaiterComponent
   ],
   imports: [
     BrowserModule,

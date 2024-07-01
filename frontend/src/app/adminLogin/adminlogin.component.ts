@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-login',
@@ -11,7 +12,7 @@ export class AdminloginComponent {
   adminPassword?: string;
   message?: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   adminlogin(): void {
     const credentials = {
@@ -23,6 +24,8 @@ export class AdminloginComponent {
       (response) => {
         console.log('Login successful!', response);
         this.message = 'Login successful!';
+        localStorage.setItem('currentUser', JSON.stringify(response));
+        this.router.navigate(['/admin']);
       },
       (error) => {
         console.error('Error during login:', error);

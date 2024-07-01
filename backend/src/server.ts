@@ -50,18 +50,28 @@ router.route('/login').post((req, res) => {
 
 
 router.route('/adminlogin').post((req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
+  const { username, password } = req.body;
+    
+  user.findOne({ username }).then(user => {
+      if (!user) {
+          return res.status(400).json({ error: 'Invalid username or password' });
+      }
 
-    let data = {
-        username: username,
-        password: password
-    };
+      bcrypt.compare(password, user.password || '', (err, isMatch) => {
+          if (err) {
+              return res.status(500).json({ error: 'Internal server error' });
+          }
+          
+          if (!isMatch) {
+              return res.status(400).json({ error: 'Invalid username or password' });
+          }
 
-    user.findOne(data).then((user) => {
-        res.json(user);
-    }).catch((err) => console.log(err));
-
+          res.json(user);
+      });
+  }).catch(err => {
+      console.error('Error during login:', err);
+      res.status(500).json({ error: 'Failed to log in. Please try again.' });
+  });
 });
 
 router.route('/register').post((req, res) => {

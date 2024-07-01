@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit{
   password: string = '';
   type: string = '';
   message: string = '';
+  currentUser!: User;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -25,7 +27,13 @@ export class LoginComponent implements OnInit{
 
     this.authService.login(data).subscribe((ans) => {
       localStorage.setItem('currentUser', JSON.stringify(ans));
-      this.router.navigate(['/']); 
+
+      this.currentUser = ans as User;
+
+      if (this.currentUser.role == 'guest')
+        this.router.navigate(['/']);
+      else if (this.currentUser.role == 'waiter')
+        this.router.navigate(['/waiter']);
     });
   }
 }
