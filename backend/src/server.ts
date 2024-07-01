@@ -184,6 +184,12 @@ router.put('/update-profile', async (req, res) => {
     res.status(500).json({ message: 'Error updating user profile', error });
   }
 });
+  router.post('/guest-users', (req, res) => {
+    const { approved } = req.body;
+    user.find({ role: 'guest', approved: approved })
+      .then(users => res.json(users))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
 //-----------------------------------------------------------------
 
 

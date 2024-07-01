@@ -39,6 +39,10 @@ let User = new Schema({
         type: String,
         enum: ['admin', 'waiter', 'guest'],
         default: 'guest'
+    },
+    approved: {
+        type: Boolean,
+        default: false
     }
 });
 

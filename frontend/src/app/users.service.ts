@@ -26,4 +26,9 @@ export class UserService {
     const url = `${this.apiUrl}/update-profile`;
     return this.http.put<User>(url, user);
   }
+
+  getGuestUsers(filter: { approved: boolean }): Observable<User[]> {
+    const url = `${this.apiUrl}/guest-users`;
+    return this.http.post<User[]>(url, filter);
+  }
 }
