@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { UserService } from '../users.service';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +22,7 @@ export class RegisterComponent {
   
   message: string = '';
   
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private userService: UserService) {}
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
@@ -166,9 +168,25 @@ export class RegisterComponent {
   }
 
   //TODO: ubaciti postavljanje defaultne slike ako slika nije izabrana
-  register(): void {
+  async register(): Promise<void> {
     if(!this.validateRequiredFields() || !this.validate())
       return;
+
+    try {
+      const user = await this.userService.checkUserAlreadyExists(this.username, this.email).toPromise();
+      console.log('Existing user found:', user);
+      let checkedUser = user as User;
+      if(checkedUser != null)
+        {
+          if(checkedUser.status == 'denied')
+            this.message = "Admin denied your registration.";
+          else
+            this.message = "You cannot register multiple times.";
+          return;
+        }
+    } catch (error) {
+      console.error('Error checking user existence:', error);
+    }
 
     const formData = {
       username: this.username,

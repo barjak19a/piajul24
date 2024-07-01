@@ -220,6 +220,25 @@ router.put('/users/deny/:username', async (req, res) => {
       res.status(500).json({ error: 'Failed to deny user' });
   }
 });
+
+router.post('/users/check-existence', async (req, res) => {
+  const { username, email } = req.body;
+
+  try {
+    const myuser = await user.findOne({
+      $or: [{ username }, { email }]
+    });
+
+    if (myuser) {
+      return res.json(myuser);
+    }
+
+    res.status(404).json({ message: 'User not found' });
+  } catch (err) {
+    console.error('Error checking user existence:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 

@@ -41,4 +41,12 @@ export class UserService {
     const url = `${this.apiUrl}/users/deny/${username}`;
     return this.http.put(url, {});
   }
+
+  checkUserAlreadyExists(username: string, email: string): Observable<User> {
+    let data = {
+      username: username,
+      email: email
+    };
+    return this.http.post<User>(`${this.apiUrl}/users/check-existence`, data);
+  }
 }
