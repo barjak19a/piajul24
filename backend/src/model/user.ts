@@ -40,9 +40,10 @@ let User = new Schema({
         enum: ['admin', 'waiter', 'guest'],
         default: 'guest'
     },
-    approved: {
-        type: Boolean,
-        default: false
+    status: {
+        type: String,
+        enum: ['pending', 'approved', 'denied'],
+        default: 'pending'
     }
 });
 

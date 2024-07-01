@@ -27,7 +27,7 @@ export class AdminComponent {
   }
 
   collectGuestUsers(): void {
-    this.userService.getGuestUsers({ approved: false }).subscribe(
+    this.userService.getGuestUsers({ status: 'pending' }).subscribe(
       (users: User[]) => {
         this.guestUsers = users;
         console.log('Unapproved guest users:', this.guestUsers);
@@ -38,11 +38,29 @@ export class AdminComponent {
     );
   }
 
-  approveUser(user: User): void {
-    // Implement the logic to approve a user
+  approveUser(username: string): void {
+    this.userService.approveUser(username).subscribe(
+      (response) => {
+        console.log('User approved:', response);
+        this.collectGuestUsers();
+      },
+      (error) => {
+        console.error('Error approving user:', error);
+        // Handle error
+      }
+    );
   }
-  
-  denyUser(user: User): void {
-    // implement the logic to deny a user
+
+  denyUser(username: string): void {
+    this.userService.denyUser(username).subscribe(
+      (response) => {
+        console.log('User denied:', response);
+        this.collectGuestUsers();
+      },
+      (error) => {
+        console.error('Error denying user:', error);
+        // Handle error
+      }
+    );
   }
 }

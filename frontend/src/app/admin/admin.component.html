@@ -30,11 +30,11 @@
             <td>{{ user.role }}</td>
             <td>
               <!-- You can add buttons for actions like approving the user here -->
-              <button class="btn btn-primary" (click)="approveUser(user)">Approve</button>
+              <button class="btn btn-primary" (click)="approveUser(user.username)">Approve</button>
             </td>
             <td>
               <!-- You can add buttons for actions like denying the user here -->
-              <button class="btn btn-danger" (click)="denyUser(user)">Deny</button>
+              <button class="btn btn-danger" (click)="denyUser(user.username)">Deny</button>
             </td>
           </tr>
         </tbody>

@@ -10,4 +10,5 @@ export class User {
     profilePicture: string = "";
     creditCard: string = "";
     role: string = "guest";
+    status: string = "";
 }

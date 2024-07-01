@@ -27,8 +27,18 @@ export class UserService {
     return this.http.put<User>(url, user);
   }
 
-  getGuestUsers(filter: { approved: boolean }): Observable<User[]> {
+  getGuestUsers(filter: { status: string }): Observable<User[]> {
     const url = `${this.apiUrl}/guest-users`;
     return this.http.post<User[]>(url, filter);
+  }
+
+  approveUser(username: string): Observable<any> {
+    const url = `${this.apiUrl}/users/approve/${username}`;
+    return this.http.put(url, {});
+  }
+
+  denyUser(username: string): Observable<any> {
+    const url = `${this.apiUrl}/users/deny/${username}`;
+    return this.http.put(url, {});
   }
 }

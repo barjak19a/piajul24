@@ -186,10 +186,40 @@ router.put('/update-profile', async (req, res) => {
 });
   router.post('/guest-users', (req, res) => {
     const { approved } = req.body;
-    user.find({ role: 'guest', approved: approved })
+    user.find({ role: 'guest', status: 'pending' })
       .then(users => res.json(users))
       .catch(err => res.status(400).json('Error: ' + err));
   });
+
+router.put('/users/approve/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+      const myUser = await user.findOneAndUpdate({ username }, { status: 'approved' }, { new: true });
+      if (!myUser) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+      res.json(myUser);
+  } catch (err) {
+      console.error('Error approving user:', err);
+      res.status(500).json({ error: 'Failed to approve user' });
+  }
+});
+
+router.put('/users/deny/:username', async (req, res) => {
+  const username = req.params.username;
+
+  try {
+      const myuser = await user.findOneAndUpdate({ username }, { status: 'denied' }, { new: true });
+      if (!myuser) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+      res.json(myuser);
+  } catch (err) {
+      console.error('Error denying user:', err);
+      res.status(500).json({ error: 'Failed to deny user' });
+  }
+});
 //-----------------------------------------------------------------
 
 
