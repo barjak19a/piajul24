@@ -24,6 +24,20 @@ export class RegisterComponent {
   
   constructor(private authService: AuthService, private userService: UserService) {}
 
+  ngOnInit() {
+    const filePath = 'assets/default_profile_photo.png'; // Replace with the path to your photo
+    fetch(filePath)
+      .then(response => response.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.profilePicture = reader.result as string;
+        };
+        reader.readAsDataURL(blob);
+      })
+      .catch(error => console.error('Error loading photo:', error));
+  }
+
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
 

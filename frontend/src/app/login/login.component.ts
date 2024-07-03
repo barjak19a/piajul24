@@ -34,6 +34,9 @@ export class LoginComponent implements OnInit{
         this.router.navigate(['/']);
       else if (this.currentUser.role == 'waiter')
         this.router.navigate(['/waiter']);
+    },
+    (error) => {
+      this.message = 'Login failed: ' + error.error.error;
     });
   }
 }
