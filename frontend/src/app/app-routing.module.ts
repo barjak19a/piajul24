@@ -9,6 +9,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { AdminComponent } from './admin/admin.component';
 import { WaiterComponent } from './waiter/waiter.component';
+import { AddWaiterComponent } from './add-waiter/add-waiter.component';
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
+import { AdminGuestListComponent } from './admin-guest-list/admin-guest-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,8 +21,11 @@ const routes: Routes = [
   { path: 'change-password', component: ChangePasswordComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'profile-edit', component: ProfileEditComponent},
-  { path: 'admin', component: AdminComponent},
-  { path: 'waiter', component: WaiterComponent}
+  { path: 'pending-guests', component: AdminComponent},
+  { path: 'waiter', component: WaiterComponent},
+  { path: 'add-waiter', component: AddWaiterComponent},
+  { path: 'add-restaurant', component: AddRestaurantComponent},
+  { path: 'admin-guest-list', component: AdminGuestListComponent}
 ];
 
 @NgModule({

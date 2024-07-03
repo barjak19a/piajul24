@@ -68,4 +68,8 @@ export class UserService {
     };
     return this.http.post<User>(`${this.apiUrl}/users/check-existence`, data);
   }
+
+  getUsersOfTypeGuest(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users?role=guest&status=approved`);
+  }
 }

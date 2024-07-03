@@ -239,6 +239,18 @@ router.post('/users/check-existence', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+router.get('/users', async (req, res) => {
+  const { role, status } = req.query;
+
+  try {
+    const myUsers = await user.find({ role: role, status: status });
+    res.json(myUsers);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 

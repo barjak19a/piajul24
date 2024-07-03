@@ -14,7 +14,10 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { AdminComponent } from './admin/admin.component';
-import { WaiterComponent } from './waiter/waiter.component'
+import { WaiterComponent } from './waiter/waiter.component';
+import { AddWaiterComponent } from './add-waiter/add-waiter.component';
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
+import { AdminGuestListComponent } from './admin-guest-list/admin-guest-list.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { WaiterComponent } from './waiter/waiter.component'
     ProfileComponent,
     ProfileEditComponent,
     AdminComponent,
-    WaiterComponent
+    WaiterComponent,
+    AddWaiterComponent,
+    AddRestaurantComponent,
+    AdminGuestListComponent
   ],
   imports: [
     BrowserModule,
