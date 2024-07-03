@@ -72,4 +72,8 @@ export class UserService {
   getUsersOfTypeGuest(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/users?role=guest&status=approved`);
   }
+
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/${username}`);
+  }
 }

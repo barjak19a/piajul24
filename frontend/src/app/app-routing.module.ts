@@ -12,6 +12,7 @@ import { WaiterComponent } from './waiter/waiter.component';
 import { AddWaiterComponent } from './add-waiter/add-waiter.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { AdminGuestListComponent } from './admin-guest-list/admin-guest-list.component';
+import { AdminEditGuestComponent } from './admin-edit-guest/admin-edit-guest.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'waiter', component: WaiterComponent},
   { path: 'add-waiter', component: AddWaiterComponent},
   { path: 'add-restaurant', component: AddRestaurantComponent},
-  { path: 'admin-guest-list', component: AdminGuestListComponent}
+  { path: 'admin-guest-list', component: AdminGuestListComponent},
+  { path: 'admin-edit-guest/:username', component: AdminEditGuestComponent}
 ];
 
 @NgModule({

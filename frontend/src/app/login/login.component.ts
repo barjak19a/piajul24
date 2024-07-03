@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit{
     };
 
     this.authService.login(data).subscribe((ans) => {
-      //localStorage.setItem('currentUser', JSON.stringify(ans));
       this.userService.setCurrentUser(ans as User);
 
       this.currentUser = ans as User;

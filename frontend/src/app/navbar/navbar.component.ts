@@ -25,7 +25,6 @@ export class NavbarComponent {
   }
 
   logout(): void {
-    // localStorage.removeItem('currentUser');
     this.userService.setCurrentUser(null);
     this.router.navigate(['/']);
   }

@@ -31,7 +31,7 @@
             <td>{{ user.creditCard }}</td>
             <td>{{ user.role }}</td>
             <td>
-                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-primary" [routerLink]="['/admin-edit-guest', user.username]">Edit</button>
             </td>
           </tr>
         </tbody>

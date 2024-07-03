@@ -28,7 +28,7 @@ export class AdminloginComponent {
         this.message = 'Login successful!';
 
         this.userService.setCurrentUser(response as User);
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/pending-guests']);
       },
       (error) => {
         console.error('Error during login:', error);
