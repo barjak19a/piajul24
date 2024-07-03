@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './model/user.model';
 
 @Injectable({
@@ -8,8 +8,27 @@ import { User } from './model/user.model';
 })
 export class UserService {
   private apiUrl = 'http://localhost:4000'; // Replace with your API endpoint
+  private currentUserSubject!: BehaviorSubject<User | null>;
+  public currentUser!: Observable<User | null>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const storedUser = localStorage.getItem('currentUser');
+    this.currentUserSubject = new BehaviorSubject<User | null>(storedUser ? JSON.parse(storedUser) : null);
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentUserValue(): User | null {
+    return this.currentUserSubject.value;
+  }
+
+  public setCurrentUser(user: User | null): void {
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('currentUser');
+    }
+    this.currentUserSubject.next(user);
+  }
 
   changePassword(username: string, currentPassword: string, newPassword: string): Observable<any> {
     const url = `${this.apiUrl}/change-password`;

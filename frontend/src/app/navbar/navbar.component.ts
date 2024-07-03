@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../model/user.model';
+import { AuthService } from '../auth.service';
+import { UserService } from '../users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,14 +10,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(private router: Router) {}
+  currentUser: User | null = null;
+  
+  constructor(private router: Router, private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.userService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('currentUser') !== null;
+    return this.currentUser !== null;
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
+    // localStorage.removeItem('currentUser');
+    this.userService.setCurrentUser(null);
     this.router.navigate(['/']);
+  }
+
+  isAdmin(): boolean {
+    return this.currentUser?.role === 'admin';
   }
 }
