@@ -277,6 +277,21 @@ router.post('/add-restaurant', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+router.post('/get-restaurant-by-name', async (req, res) => {
+  const { restaurantName } = req.body;
+  try {
+    const my_restaurant = await restaurant.findOne({ name: restaurantName });
+    if (my_restaurant) {
+      res.json(my_restaurant);
+    } else {
+      res.status(404).json({ message: 'Restaurant not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching restaurant:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 

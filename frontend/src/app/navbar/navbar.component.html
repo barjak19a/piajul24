@@ -23,6 +23,16 @@
         <a class="nav-link" routerLink="/add-restaurant">Add Restaurant</a>
       </li>
 
+      <li class="nav-item" *ngIf="isLoggedIn() && isGuest()">
+        <a class="nav-link" routerLink="/">Restaurants</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isGuest()">
+        <a class="nav-link" routerLink="/">Reservations</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isGuest()">
+        <a class="nav-link" routerLink="/">Delivery</a>
+      </li>
+
       <li class="nav-item" *ngIf="!isLoggedIn()">
         <a class="nav-link" routerLink="/login">Login</a>
       </li>

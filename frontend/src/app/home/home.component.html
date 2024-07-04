@@ -21,6 +21,7 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Type</th>
+                    <th *ngIf="isLoggedIn()"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,7 @@
                     <td>{{ restaurant.name }}</td>
                     <td>{{ restaurant.address }}</td>
                     <td>{{ restaurant.type }}</td>
+                    <td><a [routerLink]="['/show-restaurant', restaurant.name]">Detalji</a></td>
                   </tr>
                 </tbody>
               </table>

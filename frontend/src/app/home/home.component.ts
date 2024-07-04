@@ -59,4 +59,8 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+  isLoggedIn(): boolean {
+    return this.userService.currentUserValue != null;
+  }
 }

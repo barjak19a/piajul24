@@ -20,12 +20,12 @@ export class RestaurantService {
       return this.http.get<Restaurant[]>(url);
     }
 
-    getRestaurantById(id: string): Observable<Restaurant> {
+    getRestaurantByName(name: string): Observable<Restaurant> {
       let data = {
-        id: id
+        restaurantName: name
       };
 
-      const url = `${this.apiUrl}/get-restaurant`;
+      const url = `${this.apiUrl}/get-restaurant-by-name`;
       return this.http.post<Restaurant>(url, data);
     }
 

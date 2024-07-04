@@ -32,4 +32,8 @@ export class NavbarComponent {
   isAdmin(): boolean {
     return this.currentUser?.role === 'admin';
   }
+
+  isGuest(): boolean {
+    return this.currentUser?.role === 'guest';
+  }
 }
