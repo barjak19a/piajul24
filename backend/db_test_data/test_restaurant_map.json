@@ -1,0 +1,13 @@
+{
+    "tables": [
+        { "x": 100, "y": 100, "radius": 20 },
+        { "x": 200, "y": 100, "radius": 20 },
+        { "x": 300, "y": 100, "radius": 20 }
+    ],
+    "bathrooms": [
+        { "x": 50, "y": 400, "width": 50, "height": 30 }
+    ],
+    "kitchens": [
+        { "x": 400, "y": 400, "width": 80, "height": 50 }
+    ]
+}

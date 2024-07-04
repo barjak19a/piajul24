@@ -18,7 +18,8 @@ import { WaiterComponent } from './waiter/waiter.component';
 import { AddWaiterComponent } from './add-waiter/add-waiter.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { AdminGuestListComponent } from './admin-guest-list/admin-guest-list.component';
-import { AdminEditGuestComponent } from './admin-edit-guest/admin-edit-guest.component'
+import { AdminEditGuestComponent } from './admin-edit-guest/admin-edit-guest.component';
+import { ShowRestaurantComponent } from './show-restaurant/show-restaurant.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AdminEditGuestComponent } from './admin-edit-guest/admin-edit-guest.com
     AddWaiterComponent,
     AddRestaurantComponent,
     AdminGuestListComponent,
-    AdminEditGuestComponent
+    AdminEditGuestComponent,
+    ShowRestaurantComponent
   ],
   imports: [
     BrowserModule,

@@ -19,4 +19,18 @@ export class RestaurantService {
       const url = `${this.apiUrl}/get-all-restaurants`;
       return this.http.get<Restaurant[]>(url);
     }
+
+    getRestaurantById(id: string): Observable<Restaurant> {
+      let data = {
+        id: id
+      };
+
+      const url = `${this.apiUrl}/get-restaurant`;
+      return this.http.post<Restaurant>(url, data);
+    }
+
+    addRestaurant(restaurant: Restaurant): Observable<Restaurant> {
+      const url = `${this.apiUrl}/add-restaurant`;
+      return this.http.post<Restaurant>(url, restaurant);
+    }
 }

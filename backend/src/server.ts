@@ -266,6 +266,17 @@ router.get('/users/:username', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+router.post('/add-restaurant', async (req, res) => {
+  try {
+    const newRestaurant = new restaurant(req.body);
+    await newRestaurant.save();
+    res.status(201).json(newRestaurant);
+  } catch (error) {
+    console.error('Error adding restaurant:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 
