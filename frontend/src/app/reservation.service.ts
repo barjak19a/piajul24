@@ -15,4 +15,15 @@ export class ReservationService {
   makeReservation(reservation: Reservation): Observable<any> {
     return this.http.post(`${this.apiUrl}/make-reservation`, reservation);
   }
+
+  fetchReservationsForRestaurant(restaurantName: string) {
+    let data = {
+      restaurantName: restaurantName
+    };
+    return this.http.post(`${this.apiUrl}/get-reservations`, data);
+  }
+
+  updateReservation(reservation: Reservation) {
+    return this.http.post(`${this.apiUrl}/update-reservation`, reservation);
+  }
 }

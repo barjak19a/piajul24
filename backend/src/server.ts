@@ -299,13 +299,55 @@ router.post('/get-restaurant-by-name', async (req, res) => {
 });
 
 router.post('/make-reservation', async (req, res) => {
-  const { date, time, description, guests, restaurantName } = req.body;
-  const myReservation = new reservation({ date, time, description, guests, restaurantName });
+  const { date, time, description, guests, restaurantName, username } = req.body;
+  const myReservation = new reservation({ date, time, description, guests, restaurantName, username });
   try {
       await myReservation.save();
       res.status(201).send({ message: 'Reservation created successfully' });
   } catch (error) {
       res.status(500).send({ message: 'Failed to create reservation', error });
+  }
+});
+
+router.post('/get-reservations', async (req, res) => {
+  const { restaurantName } = req.body;
+
+  try {
+    // Find reservations matching the restaurantName and pending status
+    const reservations = await reservation.find({ restaurantName, status: 'pending' });
+
+    // Return the found reservations as JSON response
+    res.json(reservations);
+  } catch (err) {
+    // Handle any errors
+    console.error('Error retrieving reservations:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.post('/update-reservation', async (req, res) => {
+  const { _id, status, reason } = req.body;
+
+  try {
+    let myReservation = await reservation.findById(_id);
+
+    if (!myReservation) {
+      return res.status(404).json({ error: 'Reservation not found' });
+    }
+
+    // Update reservation fields based on request
+    myReservation.status = status;
+    if (status === 'declined') {
+      myReservation.reason = reason;
+    }
+
+    // Save updated reservation
+    await myReservation.save();
+
+    res.json({ message: 'Reservation updated successfully', reservation: myReservation });
+  } catch (err) {
+    console.error('Error updating reservation:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 //-----------------------------------------------------------------

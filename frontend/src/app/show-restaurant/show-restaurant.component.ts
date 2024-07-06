@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RestaurantService } from '../restaurant.service';
 import { Reservation } from '../model/reservation.model';
 import { ReservationService } from '../reservation.service';
+import { UserService } from '../users.service';
 
 @Component({
   selector: 'app-show-restaurant',
@@ -22,6 +23,7 @@ export class ShowRestaurantComponent {
     private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private reservationService: ReservationService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,8 @@ export class ShowRestaurantComponent {
 
   makeReservation(): void {
     this.reservation.restaurantName = this.restaurant.name;
+    if(this.userService.currentUserValue != null)
+      this.reservation.username = this.userService.currentUserValue.username;
     this.reservationService.makeReservation(this.reservation).subscribe(
       response => {
         this.message = 'Reservation made successfully';

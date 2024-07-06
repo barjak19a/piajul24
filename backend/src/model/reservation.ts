@@ -23,6 +23,18 @@ const Reservation = new Schema({
     restaurantName: {
         type: String,
         required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'accepted', 'declined'],
+        default: 'pending'
+    },
+    reason: {
+        type: String
     }
 });
 
