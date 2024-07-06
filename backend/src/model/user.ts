@@ -44,6 +44,9 @@ let User = new Schema({
         type: String,
         enum: ['pending', 'approved', 'denied'],
         default: 'pending'
+    },
+    restaurantName: {
+        type: String
     }
 });
 

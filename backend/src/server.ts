@@ -93,6 +93,10 @@ router.route('/register').post((req, res) => {
         role
     });
 
+    if (newUser.role == "waiter") {
+      newUser.status = "approved";
+    }
+
     newUser.save()
         .then(user => {
             console.log('New user created:', user);

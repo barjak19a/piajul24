@@ -11,4 +11,5 @@ export class User {
     creditCard: string = "";
     role: string = "guest";
     status: string = "";
+    restaurantName: string = "";
 }
