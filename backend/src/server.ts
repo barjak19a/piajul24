@@ -387,7 +387,7 @@ router.post('/get-table-status', async (req, res) => {
             $gte: startDateTime.toLocaleString('en-US', {hour12: false}).split(', ')[1].slice(0,5),
             $lt: endDateTime.toLocaleString('en-US', {hour12: false}).split(', ')[1].slice(0,5)
           },
-          status: 'accepted'
+          status: { $in: ['accepted', 'used'] }
       });
 
       if (overlappingReservations.length > 0) {
@@ -410,6 +410,32 @@ router.post('/reservations-by-user', async (req, res) => {
   } catch (error) {
       console.error('Error fetching reservations:', error);
       res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.post('/get-current-reservations', async (req, res) => {
+  const { restaurantName } = req.body;
+
+  try {
+    // Get the current time and 30 minutes before
+    const currentTime = new Date();
+    const thirtyMinutesAgo = new Date(currentTime.getTime() - 30 * 60000); // 30 minutes in milliseconds
+
+    // Find reservations matching the restaurantName, status 'accepted', and time within the range
+    const reservations = await reservation.find({
+      restaurantName,
+      status:  { $in: ['accepted', 'used', 'not used'] },
+      date: { $eq: currentTime.toISOString().split('T')[0] },
+      time: { $gte: thirtyMinutesAgo.toLocaleString('en-US', {hour12: false}).split(', ')[1].slice(0,5),
+             $lte: currentTime.toLocaleString('en-US', {hour12: false}).split(', ')[1].slice(0,5) }
+    });
+
+    // Return the found reservations as JSON response
+    res.json(reservations);
+  } catch (err) {
+    // Handle any errors
+    console.error('Error retrieving reservations:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 //-----------------------------------------------------------------

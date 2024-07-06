@@ -41,4 +41,11 @@ export class ReservationService {
   getReservationsByUser(username: string): Observable<Reservation[]> {
     return this.http.post<Reservation[]>(`${this.apiUrl}/reservations-by-user`, { username });
   }
+
+  getCurrentReservations(restaurantName: string) {
+    let data = {
+      restaurantName: restaurantName
+    };
+    return this.http.post(`${this.apiUrl}/get-current-reservations`, data);
+  }
 }

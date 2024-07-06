@@ -14,6 +14,8 @@ export class WaiterReservationsComponent {
   currentWaiter!: User;
   pendingReservations!: Reservation[];
 
+  currentReservations!: Reservation[];
+
   reason: string = '';
 
   constructor(
@@ -27,6 +29,7 @@ export class WaiterReservationsComponent {
       this.currentWaiter = this.userService.currentUserValue;
 
       this.refreshReservations();
+      this.getCurrentReservations();
     }
   }
 
@@ -70,5 +73,45 @@ export class WaiterReservationsComponent {
           console.error('Error declining reservation:', error);
         }
       );
+  }
+
+  getCurrentReservations() {
+    this.reservationService.getCurrentReservations(this.currentWaiter.restaurantName).subscribe((response: any) => {
+      this.currentReservations = response as Reservation[];
+    });
+  }
+
+  confirmReservation(reservation: Reservation) {
+    reservation.status = "used";
+
+    this.reservationService.updateReservation(reservation)
+    .subscribe(
+      () => {
+        // Optionally, update the local array if needed
+        // this.pendingReservations = this.pendingReservations.filter(r => r._id !== reservation._id);
+        this.refreshReservations();
+        this.getCurrentReservations();
+      },
+      error => {
+        console.error('Error declining reservation:', error);
+      }
+    );
+  }
+
+  markAsNotUsed(reservation: Reservation) {
+    reservation.status = "not used";
+
+    this.reservationService.updateReservation(reservation)
+    .subscribe(
+      () => {
+        // Optionally, update the local array if needed
+        // this.pendingReservations = this.pendingReservations.filter(r => r._id !== reservation._id);
+        this.refreshReservations();
+        this.getCurrentReservations();
+      },
+      error => {
+        console.error('Error declining reservation:', error);
+      }
+    );
   }
 }
