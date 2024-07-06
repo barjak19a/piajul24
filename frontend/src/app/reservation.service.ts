@@ -60,4 +60,14 @@ export class ReservationService {
   getReservationsCountLast30Days() {
     return this.http.get(`${this.apiUrl}/reservations-last-30-days`);
   }
+
+  getTotalGuestsByWaiter(waiterUsername: string): Observable<any> {
+    const url = `${this.apiUrl}/total-guests-by-waiter`;
+    const body = { waiterUsername };
+    return this.http.post<any>(url, body);
+  }
+
+  getWaiterGuests(restaurantName: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/waiter-guests`, { restaurantName });
+  }
 }

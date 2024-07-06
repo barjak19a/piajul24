@@ -573,6 +573,74 @@ router.post('/update-order', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+router.post('/total-guests-by-waiter', async (req, res) => {
+  const { waiterUsername } = req.body;
+
+  try {
+    // Calculate the date range for the last 10 days
+    const today = new Date();
+    const tenDaysAgo = new Date();
+    tenDaysAgo.setDate(today.getDate() - 10);
+
+    // Format dates to match the string format in the reservation model
+    const formattedToday = today.toISOString().split('T')[0];
+    const formattedTenDaysAgo = tenDaysAgo.toISOString().split('T')[0];
+
+    // Find reservations for the waiterUsername and date range
+    const reservations = await reservation.aggregate([
+      {
+        $match: {
+          waiterUsername,
+          date: { $gte: formattedTenDaysAgo, $lte: formattedToday },
+          status: 'used'
+        }
+      },
+      {
+        $group: {
+          _id: "$date",
+          totalGuests: { $sum: "$guests" }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
+
+    // Return the aggregated results as JSON response
+    res.json(reservations);
+  } catch (err) {
+    console.error('Error calculating total guests:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.post('/waiter-guests', async (req, res) => {
+  const { restaurantName } = req.body;
+
+  try {
+    // Aggregate reservations to calculate total guests per waiter
+    const waiterGuests = await reservation.aggregate([
+      {
+        $match: { restaurantName, status: 'used' }
+      },
+      {
+        $group: {
+          _id: "$waiterUsername",
+          totalGuests: { $sum: "$guests" }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
+
+    res.json(waiterGuests);
+  } catch (err) {
+    console.error('Error calculating waiter guests:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 

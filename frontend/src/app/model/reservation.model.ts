@@ -9,4 +9,5 @@ export class Reservation {
     status: string = '';
     reason: string = '';
     tableId: string = '';
+    waiterUsername?: string;
   }

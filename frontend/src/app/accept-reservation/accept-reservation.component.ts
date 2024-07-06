@@ -120,6 +120,7 @@ export class AcceptReservationComponent {
   acceptReservation() {
     this.reservation.tableId = this.selectedTableId;
     this.reservation.status = 'accepted';
+    this.reservation.waiterUsername = this.userService.currentUserValue!.username;
     this.reservationService.updateReservation(this.reservation).subscribe((response) => {
       console.log(response);
       this.router.navigate(['/waiter-reservations']);

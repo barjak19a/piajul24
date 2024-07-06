@@ -31,7 +31,7 @@
                     <td>{{ restaurant.name }}</td>
                     <td>{{ restaurant.address }}</td>
                     <td>{{ restaurant.type }}</td>
-                    <td *ngIf="isLoggedIn()"><a [routerLink]="['/show-restaurant', restaurant.name]">Detalji</a></td>
+                    <td *ngIf="isLoggedIn()"><a [routerLink]="['/show-restaurant', restaurant.name]">Details</a></td>
                   </tr>
                 </tbody>
               </table>

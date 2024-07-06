@@ -25,7 +25,9 @@ import { AcceptReservationComponent } from './accept-reservation/accept-reservat
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
 import { RestaurantMenuComponent } from './restaurant-menu/restaurant-menu.component';
 import { GuestOrdersComponent } from './guest-orders/guest-orders.component';
-import { WaiterDeliveryComponent } from './waiter-delivery/waiter-delivery.component'
+import { WaiterDeliveryComponent } from './waiter-delivery/waiter-delivery.component';
+import { WaiterStatsComponent } from './waiter-stats/waiter-stats.component'
+import { Chart } from 'chart.js';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { WaiterDeliveryComponent } from './waiter-delivery/waiter-delivery.compo
     GuestReservationsComponent,
     RestaurantMenuComponent,
     GuestOrdersComponent,
-    WaiterDeliveryComponent
+    WaiterDeliveryComponent,
+    WaiterStatsComponent
   ],
   imports: [
     BrowserModule,

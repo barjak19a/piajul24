@@ -40,6 +40,9 @@ const Reservation = new Schema({
     tableId: {
         type: ObjectId
     },
+    waiterUsername: {
+        type: String
+    }
 });
 
 // Create and export the Reservation model

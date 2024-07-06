@@ -1,24 +1,31 @@
-<!-- guest-orders.component.html -->
-
 <div class="container">
-    <h2>Guest Orders</h2>
-  
-    <div *ngIf="orders.length > 0; else noOrders">
-      <div class="card mb-3" *ngFor="let order of orders">
-        <div class="card-body">
-          <h5 class="card-title">{{ order.restaurantName }} Order</h5>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" *ngFor="let item of order.foods">
-              {{ item.food.name }} - Quantity: {{ item.quantity }}
-            </li>
-          </ul>
-          <p><strong>Total Price:</strong> {{ calculateTotalPrice(order.foods) | currency }}</p>
+  <h2>Guest Orders</h2>
+
+  <div *ngIf="orders.length > 0; else noOrders">
+    <div class="card mb-3" *ngFor="let order of orders">
+      <div class="card-body">
+        <h5 class="card-title">{{ order.restaurantName }} Order</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let item of order.foods">
+            {{ item.food.name }} - Quantity: {{ item.quantity }}
+          </li>
+        </ul>
+        <p><strong>Total Price:</strong> {{ calculateTotalPrice(order.foods) | currency }}</p>
+
+        <p>
+          <strong>Status:</strong>
+          <span [ngClass]="{ 'text-success': order.status === 'accepted', 'text-danger': order.status === 'declined' }">
+            {{ order.status }}
+          </span>
+        </p>
+        <div *ngIf="order.status === 'accepted'">
+          <p><strong>Delivery Time:</strong> {{ order.deliveryTime }}</p>
         </div>
       </div>
     </div>
-  
-    <ng-template #noOrders>
-      <p>No orders available.</p>
-    </ng-template>
   </div>
-  
+
+  <ng-template #noOrders>
+    <p>No orders available.</p>
+  </ng-template>
+</div>

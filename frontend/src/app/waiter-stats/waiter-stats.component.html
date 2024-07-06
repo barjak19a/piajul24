@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Guest Count for Waiter: {{ waiterUsername }}</h2>
+  
+    <div *ngIf="totalGuestsByDate.length > 0; else noData" class="chart-container">
+      <canvas id="guestChart">{{ chart }}</canvas>
+    </div>
+  
+    <ng-template #noData>
+      <p>No guest count data available.</p>
+    </ng-template>
+  </div>
