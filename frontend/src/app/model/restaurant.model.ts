@@ -1,7 +1,9 @@
 export class Table {
+  _id?: string;
   x!: number;
   y!: number;
   radius!: number;
+  status?: string;
 }
 
 export class Rectangle {

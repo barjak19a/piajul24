@@ -3,6 +3,7 @@ import { ReservationService } from '../reservation.service';
 import { UserService } from '../users.service';
 import { User } from '../model/user.model';
 import { Reservation } from '../model/reservation.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-waiter-reservations',
@@ -17,7 +18,8 @@ export class WaiterReservationsComponent {
 
   constructor(
     private reservationService: ReservationService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -30,16 +32,18 @@ export class WaiterReservationsComponent {
 
   acceptReservation(reservation: Reservation) {
     // Assuming you have an update method in your service to change reservation status
-    reservation.status = 'accepted';
-    this.reservationService.updateReservation(reservation)
-      .subscribe(
-        (response) => {
-          this.refreshReservations();
-        },
-        error => {
-          console.error('Error accepting reservation:', error);
-        }
-      );
+
+    // reservation.status = 'accepted';
+    // this.reservationService.updateReservation(reservation)
+    //   .subscribe(
+    //     (response) => {
+    //       this.refreshReservations();
+    //     },
+    //     error => {
+    //       console.error('Error accepting reservation:', error);
+    //     }
+    //   );
+    this.router.navigate(['/accept-reservation', reservation._id]);
   }
 
   private refreshReservations() {

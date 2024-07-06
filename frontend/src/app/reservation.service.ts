@@ -26,4 +26,15 @@ export class ReservationService {
   updateReservation(reservation: Reservation) {
     return this.http.post(`${this.apiUrl}/update-reservation`, reservation);
   }
+
+  fetchReservationsById(reservationId: string) {
+    let data = {
+      reservationId: reservationId
+    };
+    return this.http.post(`${this.apiUrl}/get-reservation`, data);
+  }
+
+  getTableStatus(data: any) {
+    return this.http.post(`${this.apiUrl}/get-table-status`, data);
+  }
 }

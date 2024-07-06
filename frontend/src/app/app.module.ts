@@ -20,7 +20,8 @@ import { AddRestaurantComponent } from './add-restaurant/add-restaurant.componen
 import { AdminGuestListComponent } from './admin-guest-list/admin-guest-list.component';
 import { AdminEditGuestComponent } from './admin-edit-guest/admin-edit-guest.component';
 import { ShowRestaurantComponent } from './show-restaurant/show-restaurant.component';
-import { WaiterReservationsComponent } from './waiter-reservations/waiter-reservations.component'
+import { WaiterReservationsComponent } from './waiter-reservations/waiter-reservations.component';
+import { AcceptReservationComponent } from './accept-reservation/accept-reservation.component'
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { WaiterReservationsComponent } from './waiter-reservations/waiter-reserv
     AdminGuestListComponent,
     AdminEditGuestComponent,
     ShowRestaurantComponent,
-    WaiterReservationsComponent
+    WaiterReservationsComponent,
+    AcceptReservationComponent
   ],
   imports: [
     BrowserModule,

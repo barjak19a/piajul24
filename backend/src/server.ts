@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import user from './model/user'
 import restaurant from './model/restaurant';
 import reservation from './model/reservation';
+import { ObjectId } from 'mongodb';
 
 
 const app = express()
@@ -348,6 +349,53 @@ router.post('/update-reservation', async (req, res) => {
   } catch (err) {
     console.error('Error updating reservation:', err);
     res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
+router.post('/get-reservation', async (req, res) => {
+  const { reservationId } = req.body;
+
+  try {
+    // Find reservations matching the restaurantName and pending status
+    const myReservation = await reservation.findOne({_id : new ObjectId(reservationId)});
+
+    // Return the found reservations as JSON response
+    res.json(myReservation);
+  } catch (err) {
+    // Handle any errors
+    console.error('Error retrieving reservations:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.post('/get-table-status', async (req, res) => {
+  try {
+      const { tableId, startTime } = req.body;
+
+      const startDateTime = new Date(startTime);
+      const endDateTime = new Date(startDateTime);
+      endDateTime.setHours(startDateTime.getHours() + 3);
+
+      // Find overlapping reservations
+      const overlappingReservations = await reservation.find({
+          tableId: new ObjectId(tableId),
+          date: startDateTime.toISOString().split('T')[0],
+          time: {
+            $gte: startDateTime.toLocaleString('en-US', {hour12: false}).split(', ')[1].slice(0,5),
+            $lt: endDateTime.toLocaleString('en-US', {hour12: false}).split(', ')[1].slice(0,5)
+          },
+          status: 'accepted'
+      });
+
+      if (overlappingReservations.length > 0) {
+          return res.status(200).json({ status: 'unavailable', reservations: overlappingReservations });
+      }
+
+      res.status(200).json({ status: 'available' });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
   }
 });
 //-----------------------------------------------------------------

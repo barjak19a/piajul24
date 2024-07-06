@@ -8,4 +8,5 @@ export class Reservation {
     username: string = '';
     status: string = '';
     reason: string = '';
+    tableId: string = '';
   }

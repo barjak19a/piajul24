@@ -15,6 +15,7 @@ import { AdminGuestListComponent } from './admin-guest-list/admin-guest-list.com
 import { AdminEditGuestComponent } from './admin-edit-guest/admin-edit-guest.component';
 import { ShowRestaurantComponent } from './show-restaurant/show-restaurant.component';
 import { WaiterReservationsComponent } from './waiter-reservations/waiter-reservations.component';
+import { AcceptReservationComponent } from './accept-reservation/accept-reservation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'admin-guest-list', component: AdminGuestListComponent},
   { path: 'admin-edit-guest/:username', component: AdminEditGuestComponent},
   { path: 'show-restaurant/:restaurantName', component: ShowRestaurantComponent},
-  { path: 'waiter-reservations', component: WaiterReservationsComponent}
+  { path: 'waiter-reservations', component: WaiterReservationsComponent},
+  { path: 'accept-reservation/:reservationId', component: AcceptReservationComponent}
 ];
 
 @NgModule({

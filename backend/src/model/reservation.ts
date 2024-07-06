@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -35,7 +36,10 @@ const Reservation = new Schema({
     },
     reason: {
         type: String
-    }
+    },
+    tableId: {
+        type: ObjectId
+    },
 });
 
 // Create and export the Reservation model
