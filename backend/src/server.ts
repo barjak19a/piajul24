@@ -438,6 +438,63 @@ router.post('/get-current-reservations', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+router.get('/reservations-last-7-days', async (req, res) => {
+  try {
+    // Calculate the date 7 days ago from today
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    // Query to count reservations within the last 7 days
+    const countReservations = await reservation.countDocuments({
+        date: { $gte: sevenDaysAgo.toISOString().split('T')[0] }, // Date should be greater than or equal to 7 days ago
+        status: { $in: ['accepted', 'used'] } // Only count 'accepted' or 'used' reservations
+    });
+
+    res.json({ count: countReservations });
+} catch (err) {
+    console.error('Error counting reservations:', err);
+    res.status(500).json({ error: 'Server error' });
+}
+});
+
+router.get('/reservations-last-1-days', async (req, res) => {
+  try {
+    // Calculate the date 7 days ago from today
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 1);
+
+    // Query to count reservations within the last 1 days
+    const countReservations = await reservation.countDocuments({
+        date: { $gte: sevenDaysAgo.toISOString().split('T')[0] }, // Date should be greater than or equal to 7 days ago
+        status: { $in: ['accepted', 'used'] } // Only count 'accepted' or 'used' reservations
+    });
+
+    res.json({ count: countReservations });
+} catch (err) {
+    console.error('Error counting reservations:', err);
+    res.status(500).json({ error: 'Server error' });
+}
+});
+
+router.get('/reservations-last-30-days', async (req, res) => {
+  try {
+    // Calculate the date 30 days ago from today
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 30);
+
+    // Query to count reservations within the last 1 days
+    const countReservations = await reservation.countDocuments({
+        date: { $gte: sevenDaysAgo.toISOString().split('T')[0] }, // Date should be greater than or equal to 7 days ago
+        status: { $in: ['accepted', 'used'] } // Only count 'accepted' or 'used' reservations
+    });
+
+    res.json({ count: countReservations });
+} catch (err) {
+    console.error('Error counting reservations:', err);
+    res.status(500).json({ error: 'Server error' });
+}
+});
 //-----------------------------------------------------------------
 
 

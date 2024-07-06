@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from '../restaurant.service';
 import { UserService } from '../users.service';
 import { Restaurant } from '../model/restaurant.model';
+import { ReservationService } from '../reservation.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,10 @@ export class HomeComponent implements OnInit {
   restaurants: Restaurant[] = []; // Array to hold fetched restaurants
   filteredRestaurants: Restaurant[] = [];
 
+  reservationsLastDay: number = 0;
+  reservationsLast7Days: number = 0;
+  reservationsLast30Days: number = 0;
+
   filterName: string = "";
   filterType: string = "";
   filterAddress: string = "";
@@ -23,13 +28,48 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private restaurantService: RestaurantService,
-    private userService: UserService
+    private userService: UserService,
+    private reservationService: ReservationService
   ) {}
 
   ngOnInit(): void {
     this.fetchRestaurantCount();
     this.fetchGuestUsersCount();
     this.fetchAllRestaurants();
+    this.fetchLastDayReservationsCount();
+    this.fetchLast7DaysReservationsCount();
+    this.fetchLast30DaysReservationsCount();
+  }
+
+  fetchLastDayReservationsCount(): void {
+    this.reservationService.getReservationsCountLast1Day().subscribe(
+      (response: any) => {
+        this.reservationsLastDay = response.count;
+      },
+      (error) => {
+        console.error( error);
+      }
+    );
+  }
+
+  fetchLast7DaysReservationsCount(): void {
+    this.reservationService.getReservationsCountLast7Days().subscribe(
+      (response: any) => {
+        this.reservationsLast7Days = response.count;
+      },
+      (error) => {
+      }
+    );
+  }
+
+  fetchLast30DaysReservationsCount(): void {
+    this.reservationService.getReservationsCountLast30Days().subscribe(
+      (response: any) => {
+        this.reservationsLast30Days = response.count;
+      },
+      (error) => {
+      }
+    );
   }
 
   fetchRestaurantCount(): void {

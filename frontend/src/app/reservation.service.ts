@@ -48,4 +48,16 @@ export class ReservationService {
     };
     return this.http.post(`${this.apiUrl}/get-current-reservations`, data);
   }
+
+  getReservationsCountLast1Day() {
+    return this.http.get(`${this.apiUrl}/reservations-last-7-days`);
+  }
+
+  getReservationsCountLast7Days() {
+    return this.http.get(`${this.apiUrl}/reservations-last-1-days`);
+  }
+
+  getReservationsCountLast30Days() {
+    return this.http.get(`${this.apiUrl}/reservations-last-30-days`);
+  }
 }
