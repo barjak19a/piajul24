@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ReservationService } from '../reservation.service';
 import { UserService } from '../users.service';
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-waiter-stats',
@@ -15,7 +15,8 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
   waiterGuests: any[] = [];
   averageReservationsPerDay: any;
 
-  constructor(private reservationService: ReservationService, private userService: UserService) { }
+  @ViewChild('guestChart') guestChartCanvas!: ElementRef<HTMLCanvasElement>;
+  constructor(private reservationService: ReservationService, private userService: UserService, private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {
       this.renderChart();
@@ -24,9 +25,9 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.waiterUsername = this.userService.currentUserValue!.username;
     this.getTotalGuestsByWaiter();
-    this.getWaiterGuests();
-    this.fetchAverageReservationsPerDay();
-    this.renderChart();
+    //this.getWaiterGuests();
+    //this.fetchAverageReservationsPerDay();
+    //this.renderChart();
   }
 
   getTotalGuestsByWaiter(): void {
@@ -51,27 +52,35 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
     const labels = this.generateLast10Days();
     const data = this.generateDataForChart(labels);
 
-    this.chart = new Chart('guestChart', {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Total Guests',
-          data: data,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    const canvas = this.guestChartCanvas.nativeElement;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        this.chart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Total Guests',
+              data: data,
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
           }
-        }
+        });
       }
-    });
+    }
   }
+  
+  
 
   createChart(){
   
