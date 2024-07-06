@@ -9,11 +9,19 @@ const Schema = mongoose.Schema;
 const OrderSchema = new Schema({
   username: {
     type: String,
-    required: true,
+    required: true
   },
   restaurantName: {
     type: String,
-    required: true,
+    required: true
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'accepted', 'declined'],
+    default: 'pending'
+  },
+    deliveryTime: {
+    type: String
   },
   foods: [
     {

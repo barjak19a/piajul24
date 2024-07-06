@@ -527,6 +527,20 @@ router.post('/place-order', async (req, res) => {
     res.status(500).json({ error: 'Failed to place order' });
   }
 });
+
+router.get('/orders/:username', async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    // Find orders matching the username
+    const orders = await order.find({ username }).populate('foods.food');
+
+    res.json(orders);
+  } catch (err) {
+    console.error('Error retrieving orders:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 
