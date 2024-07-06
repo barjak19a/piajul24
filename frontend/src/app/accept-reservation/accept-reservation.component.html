@@ -23,10 +23,12 @@
       <h4>Select Table</h4>
       <div class="form-group">
         <label for="tableSelect">Select a Table:</label>
-        <select id="tableSelect" class="form-control" [(ngModel)]="selectedTableId">
-          <option *ngFor="let table of availableTables; let i = index" [value]="table._id">Table {{ i + 1 }}</option>
+        <select id="tableSelect" class="form-control" [(ngModel)]="selectedTableId" (change)="chooseTable()">
+          <option *ngFor="let table of availableTables; let i = index" [value]="table._id" >Table {{ i + 1 }}</option>
         </select>
       </div>
+      <br>
+      <button class="btn btn-primary" (click)="acceptReservation()">Accept reservation</button>
     </div>
   </div>
 </div>

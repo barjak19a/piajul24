@@ -327,7 +327,7 @@ router.post('/get-reservations', async (req, res) => {
 });
 
 router.post('/update-reservation', async (req, res) => {
-  const { _id, status, reason } = req.body;
+  const { _id, status, reason, tableId } = req.body;
 
   try {
     let myReservation = await reservation.findById(_id);
@@ -340,6 +340,8 @@ router.post('/update-reservation', async (req, res) => {
     myReservation.status = status;
     if (status === 'declined') {
       myReservation.reason = reason;
+    } else {
+      myReservation.tableId = tableId;
     }
 
     // Save updated reservation

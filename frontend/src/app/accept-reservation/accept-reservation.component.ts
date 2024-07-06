@@ -22,6 +22,8 @@ export class AcceptReservationComponent {
   reservation!: Reservation;
   availableTables: Table[] = [];
 
+  message!: string;
+
   constructor(
     private route: ActivatedRoute,
     private reservationService: ReservationService,
@@ -63,8 +65,6 @@ export class AcceptReservationComponent {
                   this.drawRestaurantMap();
               });
             });
-
-            
           },
           error => {
             console.error('Error fetching restaurant:', error);
@@ -93,8 +93,10 @@ export class AcceptReservationComponent {
       ctx!.arc(table.x, table.y, table.radius, 0, Math.PI * 2);
       if(table.status == 'available') {
         ctx!.fillStyle = 'green';
-      } else {
+      } else if(table.status == 'unavailable') {
         ctx!.fillStyle = 'red'; 
+      } else {
+        ctx!.fillStyle = 'blue'; 
       }
 
 
@@ -115,4 +117,20 @@ export class AcceptReservationComponent {
     });
   }
 
+  acceptReservation() {
+    this.reservation.tableId = this.selectedTableId;
+    this.reservation.status = 'accepted';
+    this.reservationService.updateReservation(this.reservation).subscribe((response) => {
+      console.log(response);
+      this.router.navigate(['/waiter-reservations']);
+    }, error => console.log(error));
+  }
+
+  chooseTable() {
+    console.log(this.selectedTableId);
+    this.availableTables.forEach((table: Table) => table.status = 'available');
+    const selectedTable = this.currentRestaurant.map.tables.find((table: Table) => table._id === this.selectedTableId);
+    selectedTable!.status = 'selected';
+    this.drawRestaurantMap();
+  }
 }

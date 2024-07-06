@@ -21,7 +21,8 @@ import { AdminGuestListComponent } from './admin-guest-list/admin-guest-list.com
 import { AdminEditGuestComponent } from './admin-edit-guest/admin-edit-guest.component';
 import { ShowRestaurantComponent } from './show-restaurant/show-restaurant.component';
 import { WaiterReservationsComponent } from './waiter-reservations/waiter-reservations.component';
-import { AcceptReservationComponent } from './accept-reservation/accept-reservation.component'
+import { AcceptReservationComponent } from './accept-reservation/accept-reservation.component';
+import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component'
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AcceptReservationComponent } from './accept-reservation/accept-reservat
     AdminEditGuestComponent,
     ShowRestaurantComponent,
     WaiterReservationsComponent,
-    AcceptReservationComponent
+    AcceptReservationComponent,
+    GuestReservationsComponent
   ],
   imports: [
     BrowserModule,
