@@ -4,8 +4,8 @@
         броју ресторана, <br> <b>DONE </b>укупном броју регистрованих гостију у систему,<br> број резервација у
         последњих 24 часа, <br>седам дана и <br>месец дана, и <br> <b>DONE</b>приказати листу ресторана са <br>листом
         тренутно ангажованих конобара (исписати само њихово име и презиме) у сваком од тих
-        ресторана. <br>Омогућити сортирање (и неопадајуће, и нерастуће) ресторана по свакој
-        колони (назив, адреса, тип ресторана) и<br> омогућити претраживање ресторана по имену,
+        ресторана. <br><b>DONE</b> Омогућити сортирање (и неопадајуће, и нерастуће) ресторана по свакој
+        колони (назив, адреса, тип ресторана) и<br><b>DONE</b> омогућити претраживање ресторана по имену,
         адреси и/или типу ресторана (не морају сва поља за претрагу бити попуњена). Типови
         ресторана могу бити кинески, индијски, јапански, домаћа кухиња и слично.
         </p>
@@ -18,18 +18,27 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Type</th>
-                    <th *ngIf="isLoggedIn()"></th>
+                    <th>
+                      <span (click)="sortData('name')">Name</span>
+                      <input type="text" class="form-control" [(ngModel)]="filterName" (input)="filterRestaurants()" placeholder="Search by name">
+                    </th>
+                    <th>
+                      <span (click)="sortData('address')">Address</span>
+                      <input type="text" class="form-control" [(ngModel)]="filterAddress" (input)="filterRestaurants()" placeholder="Search by address">
+                    </th>
+                    <th>
+                      <span (click)="sortData('type')">Type</span>
+                      <input type="text" class="form-control" [(ngModel)]="filterType" (input)="filterRestaurants()" placeholder="Search by type">
+                    </th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let restaurant of restaurants">
+                  <tr *ngFor="let restaurant of filteredRestaurants">
                     <td>{{ restaurant.name }}</td>
                     <td>{{ restaurant.address }}</td>
                     <td>{{ restaurant.type }}</td>
-                    <td><a [routerLink]="['/show-restaurant', restaurant.name]">Detalji</a></td>
+                    <td *ngIf="isLoggedIn()"><a [routerLink]="['/show-restaurant', restaurant.name]">Detalji</a></td>
                   </tr>
                 </tbody>
               </table>

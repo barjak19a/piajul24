@@ -12,6 +12,14 @@ export class HomeComponent implements OnInit {
   restaurantCount: number = 0; // Initialize with default value
   guestUsersCount: number = 0; // Initialize with default value
   restaurants: Restaurant[] = []; // Array to hold fetched restaurants
+  filteredRestaurants: Restaurant[] = [];
+
+  filterName: string = "";
+  filterType: string = "";
+  filterAddress: string = "";
+
+  sortColumn: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   constructor(
     private restaurantService: RestaurantService,
@@ -52,6 +60,7 @@ export class HomeComponent implements OnInit {
     this.restaurantService.getAllRestaurants().subscribe(
       (restaurants) => {
         this.restaurants = restaurants;
+        this.filteredRestaurants = restaurants;
         console.log('Fetched restaurants:', this.restaurants);
       },
       (error) => {
@@ -62,5 +71,40 @@ export class HomeComponent implements OnInit {
 
   isLoggedIn(): boolean {
     return this.userService.currentUserValue != null;
+  }
+
+  filterRestaurants() {
+    this.filteredRestaurants = this.restaurants.filter(restaurant => {
+      const matchesName = restaurant.name.toLowerCase().includes(this.filterName.toLowerCase());
+      const matchesAddress = restaurant.address.toLowerCase().includes(this.filterAddress.toLowerCase());
+      const matchesType = restaurant.type.toLowerCase().includes(this.filterType.toLowerCase());
+      return matchesName && matchesAddress && matchesType;
+    });
+  }
+
+  sortData(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+    this.sortRestaurants();
+  }
+
+  sortRestaurants(): void {
+    this.filteredRestaurants.sort((a, b) => {
+      const x = a as any;
+      const y = b as any;
+      const valueA = x[this.sortColumn].toLowerCase();
+      const valueB = y[this.sortColumn].toLowerCase();
+      if (valueA < valueB) {
+        return this.sortDirection === 'asc' ? -1 : 1;
+      }
+      if (valueA > valueB) {
+        return this.sortDirection === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
   }
 }
