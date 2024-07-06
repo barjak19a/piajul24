@@ -41,6 +41,7 @@ export class AddRestaurantComponent {
       reader.readAsText(this.mapFile);
     } else {
       this.message = "Choose JSON file with restaurant data";
+      this.messageSuccess = "";
     }
   }
 
@@ -49,11 +50,13 @@ export class AddRestaurantComponent {
       response => {
         console.log('Restaurant saved successfully:', response);
         this.messageSuccess = 'Restaurant added successfully.';
+        this.message = "";
         this.resetForm();
       },
       error => {
         console.error('Error saving restaurant:', error);
         this.message = 'Failed to add restaurant.';
+        this.messageSuccess = "";
       }
     );
   }

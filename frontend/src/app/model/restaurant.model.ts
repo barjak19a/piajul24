@@ -17,9 +17,17 @@ export class Map {
   kitchens!: Rectangle[];
 }
 
+export class WorkingHours {
+  start: string = "";
+  end: string = "";
+}
+
 export class Restaurant {
     name: string = "";
     address: string = "";
     type: string = "";
+    description: string = "";
+    contact: string = "";
+    workingHours: WorkingHours = new WorkingHours();
     map!: Map;
 }

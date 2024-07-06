@@ -32,6 +32,16 @@ const Restaurant = new Schema({
     type: {
         type: String
     },
+    description: {
+        type: String
+    },
+    contact: {
+        type: String
+    },
+    workingHours: {
+        start: { type: String, required: true },
+        end: { type: String, required: true }
+    },
     map: { type: MapSchema, required: true }
 });
 
