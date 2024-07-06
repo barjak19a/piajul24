@@ -7,6 +7,8 @@ import user from './model/user'
 import restaurant from './model/restaurant';
 import reservation from './model/reservation';
 import { ObjectId } from 'mongodb';
+import food from './model/food';
+import order from './model/order';
 
 
 const app = express()
@@ -494,6 +496,36 @@ router.get('/reservations-last-30-days', async (req, res) => {
     console.error('Error counting reservations:', err);
     res.status(500).json({ error: 'Server error' });
 }
+});
+
+router.post('/foods', async (req, res) => {
+  const { restaurantName } = req.body;
+
+  try {
+    // Find all foods that belong to the specified restaurantName
+    const foods = await food.find({ restaurantName });
+
+    // Return the found foods as JSON response
+    res.json(foods);
+  } catch (err) {
+    // Handle any errors
+    console.error('Error retrieving foods:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.post('/place-order', async (req, res) => {
+  const { username, restaurantName, foods } = req.body;
+
+  try {
+    // Create a new order
+    const newOrder = await order.create({ username, restaurantName, foods });
+
+    res.status(201).json(newOrder);
+  } catch (err) {
+    console.error('Error placing order:', err);
+    res.status(500).json({ error: 'Failed to place order' });
+  }
 });
 //-----------------------------------------------------------------
 

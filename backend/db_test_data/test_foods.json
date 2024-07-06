@@ -1,0 +1,73 @@
+[
+    {
+      "name": "Margherita Pizza",
+      "price": 10.99,
+      "ingredients": ["Tomato sauce", "Mozzarella cheese", "Basil"],
+      "photoUrl": "https://example.com/margherita.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Chicken Tikka Masala",
+      "price": 12.99,
+      "ingredients": ["Chicken", "Tomato sauce", "Cream", "Spices"],
+      "photoUrl": "https://example.com/tikka_masala.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Caesar Salad",
+      "price": 8.99,
+      "ingredients": ["Romaine lettuce", "Croutons", "Parmesan cheese", "Caesar dressing"],
+      "photoUrl": "https://example.com/caesar_salad.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Beef Burger",
+      "price": 9.99,
+      "ingredients": ["Beef patty", "Lettuce", "Tomato", "Cheese", "Pickles", "Burger bun"],
+      "photoUrl": "https://example.com/beef_burger.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Sushi Combo",
+      "price": 15.99,
+      "ingredients": ["Salmon", "Tuna", "Avocado", "Sushi rice", "Nori seaweed"],
+      "photoUrl": "https://example.com/sushi_combo.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Pasta Carbonara",
+      "price": 11.99,
+      "ingredients": ["Pasta", "Egg", "Cream", "Parmesan cheese", "Pancetta"],
+      "photoUrl": "https://example.com/pasta_carbonara.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Vegan Buddha Bowl",
+      "price": 10.49,
+      "ingredients": ["Quinoa", "Mixed greens", "Chickpeas", "Roasted vegetables", "Tahini dressing"],
+      "photoUrl": "https://example.com/vegan_buddha_bowl.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Chocolate Brownie",
+      "price": 4.99,
+      "ingredients": ["Chocolate", "Flour", "Butter", "Sugar", "Eggs"],
+      "photoUrl": "https://example.com/chocolate_brownie.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Fish and Chips",
+      "price": 13.49,
+      "ingredients": ["Cod fish", "Potato chips", "Tartar sauce"],
+      "photoUrl": "https://example.com/fish_and_chips.jpg",
+      "restaurantName": "Bakinga tajna"
+    },
+    {
+      "name": "Mango Sticky Rice",
+      "price": 7.99,
+      "ingredients": ["Sticky rice", "Mango", "Coconut milk", "Sugar"],
+      "photoUrl": "https://example.com/mango_sticky_rice.jpg",
+      "restaurantName": "Bakinga tajna"
+    }
+  ]
+  

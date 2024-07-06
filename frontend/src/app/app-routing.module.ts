@@ -17,6 +17,7 @@ import { ShowRestaurantComponent } from './show-restaurant/show-restaurant.compo
 import { WaiterReservationsComponent } from './waiter-reservations/waiter-reservations.component';
 import { AcceptReservationComponent } from './accept-reservation/accept-reservation.component';
 import { GuestReservationsComponent } from './guest-reservations/guest-reservations.component';
+import { RestaurantMenuComponent } from './restaurant-menu/restaurant-menu.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'show-restaurant/:restaurantName', component: ShowRestaurantComponent},
   { path: 'waiter-reservations', component: WaiterReservationsComponent},
   { path: 'accept-reservation/:reservationId', component: AcceptReservationComponent},
-  { path: 'guest-reservations', component: GuestReservationsComponent}
+  { path: 'guest-reservations', component: GuestReservationsComponent},
+  { path: 'restaurant-menu/:restaurantName', component: RestaurantMenuComponent}
 ];
 
 @NgModule({
