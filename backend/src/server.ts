@@ -661,21 +661,32 @@ router.post('/average-reservations-per-day', async (req, res) => {
       {
         $group: {
           _id: "$dayOfWeek", // Group by day of the week
-          count: { $sum: 1 } // Count the number of reservations per day of the week
+          totalReservations: { $sum: 1 } // Count the number of reservations per day of the week
         }
       },
       {
         $group: {
-          _id: "$dayOfWeek", // Group all results together
-          averageReservations: { $avg: "$count" } // Calculate average of counts
+          _id: null, // Group all results together
+          averages: {
+            $push: {
+              dayOfWeek: "$_id",
+              averageReservations: { $avg: "$totalReservations" } // Calculate average of counts
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          _id: 0, // Exclude _id field from final result
+          averages: 1 // Include only averages array
         }
       }
     ]);
 
     if (averageReservationsPerDay.length > 0) {
-      res.json({ averageReservationsPerDay: averageReservationsPerDay });
+      res.json({ averageReservationsPerDay: averageReservationsPerDay[0].averages });
     } else {
-      res.json({ averageReservationsPerDay: 0 }); // Return 0 if no reservations found
+      res.json({ averageReservationsPerDay: [] }); // Return empty array if no reservations found
     }
   } catch (err) {
     console.error('Error calculating average reservations per day:', err);
