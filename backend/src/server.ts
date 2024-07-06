@@ -541,6 +541,38 @@ router.get('/orders/:username', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+router.post('/orders-by-restaurant', async (req, res) => {
+  const { restaurantName } = req.body;
+
+  try {
+    // Find orders matching restaurantName and status 'pending'
+    const orders = await order.find({ restaurantName, status: 'pending' }).populate('foods.food').exec();
+
+    // Return the found orders as JSON response
+    res.json(orders);
+  } catch (err) {
+    console.error('Error retrieving orders:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.post('/update-order', async (req, res) => {
+  const { _id, status, deliveryTime } = req.body;
+
+  try {
+    const updatedOrder = await order.findByIdAndUpdate(_id, { status, deliveryTime }, { new: true });
+
+    if (!updatedOrder) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+
+    res.json(updatedOrder);
+  } catch (err) {
+    console.error('Error updating order:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 

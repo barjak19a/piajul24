@@ -18,4 +18,13 @@ export class OrderService {
   getOrdersByUsername(username: string): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.apiUrl}/orders/${username}`);
   }
+
+  getPendingOrdersByRestaurant(restaurantName: string): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/orders-by-restaurant`, { restaurantName });
+  }
+
+  updateOrder(order: Order): Observable<Order> {
+    const url = `${this.apiUrl}/update-order`;
+    return this.http.post<Order>(url, order);
+  }
 }
