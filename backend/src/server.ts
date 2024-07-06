@@ -400,6 +400,18 @@ router.post('/get-table-status', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+router.post('/reservations-by-user', async (req, res) => {
+  const { username } = req.body;
+
+  try {
+      const reservations = await reservation.find({ username });
+      res.json(reservations);
+  } catch (error) {
+      console.error('Error fetching reservations:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 
