@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit{
       if (this.currentUser.role == 'guest')
         this.router.navigate(['/']);
       else if (this.currentUser.role == 'waiter')
-        this.router.navigate(['/waiter']);
+        this.router.navigate(['/profile']);
     },
     (error) => {
       this.message = 'Login failed: ' + error.error.error;
