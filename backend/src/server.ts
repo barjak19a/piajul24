@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt';
 import user from './model/user'
 import restaurant from './model/restaurant';
+import reservation from './model/reservation';
 
 
 const app = express()
@@ -294,6 +295,17 @@ router.post('/get-restaurant-by-name', async (req, res) => {
   } catch (error) {
     console.error('Error fetching restaurant:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.post('/make-reservation', async (req, res) => {
+  const { date, time, description, guests, restaurantName } = req.body;
+  const myReservation = new reservation({ date, time, description, guests, restaurantName });
+  try {
+      await myReservation.save();
+      res.status(201).send({ message: 'Reservation created successfully' });
+  } catch (error) {
+      res.status(500).send({ message: 'Failed to create reservation', error });
   }
 });
 //-----------------------------------------------------------------

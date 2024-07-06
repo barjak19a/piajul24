@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Rectangle, Restaurant, Table } from '../model/restaurant.model';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantService } from '../restaurant.service';
+import { Reservation } from '../model/reservation.model';
+import { ReservationService } from '../reservation.service';
 
 @Component({
   selector: 'app-show-restaurant',
@@ -12,10 +14,14 @@ export class ShowRestaurantComponent {
   @ViewChild('mapCanvas', { static: true })
   mapCanvas!: ElementRef<HTMLCanvasElement>;
   restaurant!: Restaurant;
+  reservation: Reservation = new Reservation();
+
+  message: string = '';
 
   constructor(
     private route: ActivatedRoute,
-    private restaurantService: RestaurantService // Service to fetch restaurant data
+    private restaurantService: RestaurantService,
+    private reservationService: ReservationService,
   ) {}
 
   ngOnInit(): void {
@@ -63,5 +69,17 @@ export class ShowRestaurantComponent {
       ctx!.fillStyle = 'red'; // Example color, customize as needed
       ctx!.fillRect(kitchen.x, kitchen.y, kitchen.width, kitchen.height);
     });
+  }
+
+  makeReservation(): void {
+    this.reservation.restaurantName = this.restaurant.name;
+    this.reservationService.makeReservation(this.reservation).subscribe(
+      response => {
+        this.message = 'Reservation made successfully';
+      },
+      error => {
+        this.message = 'Failed to make reservation';
+      }
+    );
   }
 }
