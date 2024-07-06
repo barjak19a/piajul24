@@ -13,6 +13,7 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
   totalGuestsByDate: { date: string, totalGuests: number }[] = [];
   chart: any;
   waiterGuests: any[] = [];
+  averageReservationsPerDay: any;
 
   constructor(private reservationService: ReservationService, private userService: UserService) { }
 
@@ -24,6 +25,7 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
     this.waiterUsername = this.userService.currentUserValue!.username;
     this.getTotalGuestsByWaiter();
     this.getWaiterGuests();
+    this.fetchAverageReservationsPerDay();
     this.renderChart();
   }
 
@@ -131,6 +133,19 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
       },
       error => {
         console.error('Error fetching waiter guests:', error);
+      }
+    );
+  }
+
+  fetchAverageReservationsPerDay() {
+    this.reservationService.getAverageReservationsPerDay(this.userService.currentUserValue!.restaurantName).subscribe(
+      (data) => {
+        this.averageReservationsPerDay = data.averageReservationsPerDay;
+        console.log(data);
+      },
+      (error) => {
+        console.error('Error fetching average reservations per day:', error);
+        // Handle error as per your application's requirement
       }
     );
   }

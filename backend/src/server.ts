@@ -641,6 +641,47 @@ router.post('/waiter-guests', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+router.post('/average-reservations-per-day', async (req, res) => {
+  const { restaurantName } = req.body;
+
+  try {
+    const averageReservationsPerDay = await reservation.aggregate([
+      {
+        $match: {
+          restaurantName, // Match reservations for the given restaurantName
+          status: 'used' // Filter to include only reservations with status 'used'
+        }
+      },
+      {
+        $addFields: {
+          dayOfWeek: { $dayOfWeek: { $dateFromString: { dateString: "$date" } } } // Extract day of the week (1-7, where 1 is Sunday)
+        }
+      },
+      {
+        $group: {
+          _id: "$dayOfWeek", // Group by day of the week
+          count: { $sum: 1 } // Count the number of reservations per day of the week
+        }
+      },
+      {
+        $group: {
+          _id: "$dayOfWeek", // Group all results together
+          averageReservations: { $avg: "$count" } // Calculate average of counts
+        }
+      }
+    ]);
+
+    if (averageReservationsPerDay.length > 0) {
+      res.json({ averageReservationsPerDay: averageReservationsPerDay });
+    } else {
+      res.json({ averageReservationsPerDay: 0 }); // Return 0 if no reservations found
+    }
+  } catch (err) {
+    console.error('Error calculating average reservations per day:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 //-----------------------------------------------------------------
 
 

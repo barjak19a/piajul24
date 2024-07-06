@@ -70,4 +70,8 @@ export class ReservationService {
   getWaiterGuests(restaurantName: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/waiter-guests`, { restaurantName });
   }
+
+  getAverageReservationsPerDay(restaurantName: string) {
+    return this.http.post<{ averageReservationsPerDay: number }>(`${this.apiUrl}/average-reservations-per-day`, { restaurantName });
+  }
 }
