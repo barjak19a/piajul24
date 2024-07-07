@@ -58,7 +58,7 @@ export class AcceptReservationComponent {
                   // console.log(table._id);
                   // console.log(response);
                   table.status = response['status'];
-                  if(response['status'] == 'available') {
+                  if(response['status'] == 'available' && table.numberOfTableSeats >= this.reservation.guests) {
                     this.availableTables.push(table);
                   }
 
@@ -78,6 +78,23 @@ export class AcceptReservationComponent {
     if(this.userService.currentUserValue != null) {
       this.currentWaiter = this.userService.currentUserValue;
     }
+  }
+
+  private isWithinWorkingHours(date: Date): boolean {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    const start = this.parseTimeToMinutes(this.currentRestaurant.workingHours.start);
+    const end = this.parseTimeToMinutes(this.currentRestaurant.workingHours.end);
+    const current = hours * 60 + minutes;
+
+    return current >= start && current <= end;
+  }
+
+  // Helper function to convert time to minutes
+  private parseTimeToMinutes(time: string): number {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes;
   }
 
   drawRestaurantMap(): void {
@@ -122,6 +139,10 @@ export class AcceptReservationComponent {
   }
 
   acceptReservation() {
+    if (!this.selectedTable || this.selectedTable.status !== 'available' || !this.isWithinWorkingHours(new Date())) {
+      this.message = 'Please select an available table within restaurant working hours.';
+      return;
+    }
     this.reservation.tableId = this.selectedTableId;
     this.reservation.status = 'accepted';
     this.reservation.waiterUsername = this.userService.currentUserValue!.username;

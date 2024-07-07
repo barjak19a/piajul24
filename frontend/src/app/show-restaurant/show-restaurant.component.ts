@@ -28,9 +28,9 @@ export class ShowRestaurantComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const restaurantName = params['restaurantName']; // Assuming you have a route parameter for restaurant id
+      const restaurantName = params['restaurantName']; 
 
-      // Fetch restaurant data from backend
+      
       this.restaurantService.getRestaurantByName(restaurantName).subscribe(
         restaurant => {
           this.restaurant = restaurant;
@@ -38,7 +38,7 @@ export class ShowRestaurantComponent {
         },
         error => {
           console.error('Error fetching restaurant:', error);
-          // Handle error as needed
+          
         }
       );
     });
@@ -47,34 +47,34 @@ export class ShowRestaurantComponent {
   drawRestaurantMap(): void {
     const ctx = this.mapCanvas.nativeElement.getContext('2d');
 
-    // Fill the background with grey
+    
     ctx!.fillStyle = '#D0D0D0'; // Grey color
     ctx!.fillRect(0, 0, 800, 800);
   
-    // Draw tables as circles
+    
     this.restaurant.map.tables.forEach((table: Table) => {
       ctx!.beginPath();
       ctx!.arc(table.x, table.y, table.radius, 0, Math.PI * 2);
-      ctx!.fillStyle = 'blue'; // Example color, customize as needed
+      ctx!.fillStyle = 'blue'; 
       ctx!.fill();
       ctx!.closePath();
 
       ctx!.font = '12px Arial';
-    ctx!.fillStyle = 'white'; // Example color, adjust as needed
+    ctx!.fillStyle = 'white'; 
     ctx!.textAlign = 'center';
     ctx!.textBaseline = 'middle';
     ctx!.fillText(table.numberOfTableSeats.toString(), table.x, table.y);
     });
   
-    // Draw bathrooms as rectangles
+    
     this.restaurant.map.bathrooms.forEach((bathroom: Rectangle) => {
-      ctx!.fillStyle = 'green'; // Example color, customize as needed
+      ctx!.fillStyle = 'green'; 
       ctx!.fillRect(bathroom.x, bathroom.y, bathroom.width, bathroom.height);
     });
   
-    // Draw kitchens as rectangles
+    
     this.restaurant.map.kitchens.forEach((kitchen: Rectangle) => {
-      ctx!.fillStyle = 'red'; // Example color, customize as needed
+      ctx!.fillStyle = 'red'; 
       ctx!.fillRect(kitchen.x, kitchen.y, kitchen.width, kitchen.height);
     });
   }
