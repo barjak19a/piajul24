@@ -10,7 +10,7 @@ import { Chart } from 'chart.js/auto';
 })
 export class WaiterStatsComponent implements OnInit, AfterViewInit {
   waiterUsername = '';
-  totalGuestsByDate: { date: string, totalGuests: number }[] = [];
+  totalGuestsByDate: { _id: string, totalGuests: number }[] = [];
   chart: any;
   waiterGuests: any[] = [];
   averageReservationsPerDay: any;
@@ -125,7 +125,7 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
 
   generateDataForChart(labels: string[]): number[] {
     const data: number[] = [];
-    const guestCountMap = new Map(this.totalGuestsByDate.map(item => [item.date, item.totalGuests]));
+    const guestCountMap = new Map(this.totalGuestsByDate.map(item => [item._id, item.totalGuests]));
 
     labels.forEach(label => {
       data.push(guestCountMap.get(label) || 0);
