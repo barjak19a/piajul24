@@ -72,6 +72,6 @@ export class ReservationService {
   }
 
   getAverageReservationsPerDay(restaurantName: string) {
-    return this.http.post<{ averageReservationsPerDay: number }>(`${this.apiUrl}/average-reservations-per-day`, { restaurantName });
+    return this.http.post<{ averageReservationsPerDay: {dayOfWeek: number, averageReservations: number}[] }>(`${this.apiUrl}/average-reservations-per-day`, { restaurantName });
   }
 }

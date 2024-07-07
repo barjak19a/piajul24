@@ -13,23 +13,26 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
   totalGuestsByDate: { _id: string, totalGuests: number }[] = [];
   barChart: any;
   pieChart: any;
+  histogramChart: any;
   waiterGuests: any[] = [];
-  averageReservationsPerDay: any;
+  averageReservationsPerDay: {dayOfWeek: number, averageReservations: number}[] = [];
 
   @ViewChild('barChart') barChartCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('pieChart') pieChartCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('histogramChart') histogramChartCanvas!: ElementRef<HTMLCanvasElement>;
   constructor(private reservationService: ReservationService, private userService: UserService, private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {
       this.renderBarChart();
       this.createPieChart(this.waiterGuests);
+      this.renderAverageReservationsChart();
   }
 
   ngOnInit(): void {
     this.waiterUsername = this.userService.currentUserValue!.username;
     this.getTotalGuestsByWaiter();
     this.getWaiterGuests();
-    //this.fetchAverageReservationsPerDay();
+    this.fetchAverageReservationsPerDay();
     //this.renderChart();
   }
 
@@ -118,15 +121,14 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
     );
   }
 
-  fetchAverageReservationsPerDay() {
+  fetchAverageReservationsPerDay(): void {
     this.reservationService.getAverageReservationsPerDay(this.userService.currentUserValue!.restaurantName).subscribe(
       (data) => {
         this.averageReservationsPerDay = data.averageReservationsPerDay;
-        console.log(data);
+        this.renderAverageReservationsChart();
       },
       (error) => {
         console.error('Error fetching average reservations per day:', error);
-        // Handle error as per your application's requirement
       }
     );
   }
@@ -191,4 +193,44 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
       }
     }
   }
+
+  renderAverageReservationsChart(): void {
+    if (this.histogramChart) {
+      this.histogramChart.destroy();
+    }
+
+    const labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const data = Array(7).fill(0);
+    this.averageReservationsPerDay.forEach(item => {
+      data[item.dayOfWeek - 1] = item.averageReservations;
+    });
+
+    const canvas = this.histogramChartCanvas.nativeElement;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        this.histogramChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Average Reservations',
+              data: data,
+              backgroundColor: 'rgba(153, 102, 255, 0.2)',
+              borderColor: 'rgba(153, 102, 255, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      }
+    }
+  }
 }
+
