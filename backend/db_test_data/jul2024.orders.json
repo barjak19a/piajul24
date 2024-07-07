@@ -1,0 +1,59 @@
+[{
+  "_id": {
+    "$oid": "66899f09a1067cce4774f07d"
+  },
+  "username": "kiko",
+  "restaurantName": "Bakinga tajna",
+  "foods": [
+    {
+      "food": {
+        "$oid": "668996d0c656b0fd2c79a460"
+      },
+      "quantity": 3,
+      "_id": {
+        "$oid": "66899f09a1067cce4774f07e"
+      }
+    },
+    {
+      "food": {
+        "$oid": "668996d0c656b0fd2c79a461"
+      },
+      "quantity": 2,
+      "_id": {
+        "$oid": "66899f09a1067cce4774f07f"
+      }
+    }
+  ],
+  "__v": 0,
+  "status": "accepted",
+  "deliveryTime": "20-30"
+},
+{
+  "_id": {
+    "$oid": "66899f37a1067cce4774f081"
+  },
+  "username": "kiko",
+  "restaurantName": "Bakinga tajna",
+  "foods": [
+    {
+      "food": {
+        "$oid": "668996d0c656b0fd2c79a460"
+      },
+      "quantity": 3,
+      "_id": {
+        "$oid": "66899f37a1067cce4774f082"
+      }
+    },
+    {
+      "food": {
+        "$oid": "668996d0c656b0fd2c79a461"
+      },
+      "quantity": 2,
+      "_id": {
+        "$oid": "66899f37a1067cce4774f083"
+      }
+    }
+  ],
+  "__v": 0,
+  "status": "declined"
+}]

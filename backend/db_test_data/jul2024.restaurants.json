@@ -1,0 +1,236 @@
+[{
+  "_id": {
+    "$oid": "66801add510be27ba220e6e0"
+  },
+  "name": "Taste of India",
+  "address": "123 Main St, Cityville",
+  "type": "Indian"
+},
+{
+  "_id": {
+    "$oid": "66801add510be27ba220e6e1"
+  },
+  "name": "Sushi Delight",
+  "address": "456 Oak Ave, Townsville",
+  "type": "Japanese"
+},
+{
+  "_id": {
+    "$oid": "66801add510be27ba220e6e2"
+  },
+  "name": "Golden Dragon",
+  "address": "789 Elm St, Villageton",
+  "type": "Chinese"
+},
+{
+  "_id": {
+    "$oid": "66801add510be27ba220e6e3"
+  },
+  "name": "Mamma Mia Pizzeria",
+  "address": "321 Pine Rd, Suburbia",
+  "type": "Italian"
+},
+{
+  "_id": {
+    "$oid": "66801add510be27ba220e6e4"
+  },
+  "name": "Local BBQ Joint",
+  "address": "555 Hickory Ln, Countryside",
+  "type": "American"
+},
+{
+  "_id": {
+    "$oid": "6686e8c9fa98c0cc3ed7d095"
+  },
+  "name": "vomar",
+  "address": "milica vukasinovica 2",
+  "type": "mediteranski",
+  "map": {
+    "tables": [
+      {
+        "x": 100,
+        "y": 100,
+        "radius": 20,
+        "_id": {
+          "$oid": "6686e8c9fa98c0cc3ed7d097"
+        }
+      },
+      {
+        "x": 200,
+        "y": 100,
+        "radius": 20,
+        "_id": {
+          "$oid": "6686e8c9fa98c0cc3ed7d098"
+        }
+      },
+      {
+        "x": 300,
+        "y": 100,
+        "radius": 20,
+        "_id": {
+          "$oid": "6686e8c9fa98c0cc3ed7d099"
+        }
+      }
+    ],
+    "bathrooms": [
+      {
+        "x": 50,
+        "y": 400,
+        "width": 50,
+        "height": 30,
+        "_id": {
+          "$oid": "6686e8c9fa98c0cc3ed7d09a"
+        }
+      }
+    ],
+    "kitchens": [
+      {
+        "x": 400,
+        "y": 400,
+        "width": 80,
+        "height": 50,
+        "_id": {
+          "$oid": "6686e8c9fa98c0cc3ed7d09b"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "6686e8c9fa98c0cc3ed7d096"
+    }
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66892bb363820f19d8a3a152"
+  },
+  "name": "Micina tajna",
+  "address": "Vladimira Milenkovica 17, sprat 3, ulaz B levo",
+  "type": "Valachian",
+  "workingHours": {
+    "start": "05:36",
+    "end": "22:33"
+  },
+  "map": {
+    "tables": [
+      {
+        "x": 150,
+        "y": 150,
+        "radius": 20,
+        "_id": {
+          "$oid": "66892bb363820f19d8a3a154"
+        }
+      },
+      {
+        "x": 250,
+        "y": 150,
+        "radius": 20,
+        "_id": {
+          "$oid": "66892bb363820f19d8a3a155"
+        }
+      },
+      {
+        "x": 300,
+        "y": 200,
+        "radius": 60,
+        "_id": {
+          "$oid": "66892bb363820f19d8a3a156"
+        }
+      }
+    ],
+    "bathrooms": [
+      {
+        "x": 50,
+        "y": 400,
+        "width": 50,
+        "height": 30,
+        "_id": {
+          "$oid": "66892bb363820f19d8a3a157"
+        }
+      }
+    ],
+    "kitchens": [
+      {
+        "x": 400,
+        "y": 400,
+        "width": 80,
+        "height": 50,
+        "_id": {
+          "$oid": "66892bb363820f19d8a3a158"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "66892bb363820f19d8a3a153"
+    }
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66892d5258d79363a79e5279"
+  },
+  "name": "Bakinga tajna",
+  "address": "Kneza Viseslava 3",
+  "type": "grandmas joint",
+  "description": "most delicious grandmas specialties in your plate",
+  "contact": "baba 0657891234",
+  "workingHours": {
+    "start": "01:40",
+    "end": "22:40"
+  },
+  "map": {
+    "tables": [
+      {
+        "x": 100,
+        "y": 100,
+        "radius": 20,
+        "_id": {
+          "$oid": "66892d5258d79363a79e527b"
+        }
+      },
+      {
+        "x": 200,
+        "y": 100,
+        "radius": 20,
+        "_id": {
+          "$oid": "66892d5258d79363a79e527c"
+        }
+      },
+      {
+        "x": 300,
+        "y": 100,
+        "radius": 20,
+        "_id": {
+          "$oid": "66892d5258d79363a79e527d"
+        }
+      }
+    ],
+    "bathrooms": [
+      {
+        "x": 50,
+        "y": 400,
+        "width": 50,
+        "height": 30,
+        "_id": {
+          "$oid": "66892d5258d79363a79e527e"
+        }
+      }
+    ],
+    "kitchens": [
+      {
+        "x": 400,
+        "y": 400,
+        "width": 80,
+        "height": 50,
+        "_id": {
+          "$oid": "66892d5258d79363a79e527f"
+        }
+      }
+    ],
+    "_id": {
+      "$oid": "66892d5258d79363a79e527a"
+    }
+  },
+  "__v": 0
+}]

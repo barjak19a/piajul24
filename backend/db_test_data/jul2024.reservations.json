@@ -1,0 +1,215 @@
+[{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fc9"
+  },
+  "date": "2024-07-03",
+  "time": "19:30",
+  "description": "fdfsd",
+  "guests": 7,
+  "restaurantName": "Bakinga tajna",
+  "username": "kiko",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e527b"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "66895d9c350fc7bafb0ac4f4"
+  },
+  "date": "2024-07-06",
+  "time": "20:02",
+  "description": "jest",
+  "guests": 4,
+  "restaurantName": "Bakinga tajna",
+  "username": "kiko",
+  "status": "used",
+  "__v": 0,
+  "tableId": {
+    "$oid": "66892d5258d79363a79e527c"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fca"
+  },
+  "date": "2024-07-02",
+  "time": "18:00",
+  "description": "Birthday celebration",
+  "guests": 5,
+  "restaurantName": "Bakinga tajna",
+  "username": "john_doe",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e527c"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fcb"
+  },
+  "date": "2024-07-01",
+  "time": "20:00",
+  "description": "Anniversary dinner",
+  "guests": 2,
+  "restaurantName": "Bakinga tajna",
+  "username": "jane_smith",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e527d"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fcc"
+  },
+  "date": "2024-07-04",
+  "time": "21:00",
+  "description": "Family gathering",
+  "guests": 8,
+  "restaurantName": "Bakinga tajna",
+  "username": "mike_jones",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e527e"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fcd"
+  },
+  "date": "2024-07-05",
+  "time": "19:00",
+  "description": "Business dinner",
+  "guests": 3,
+  "restaurantName": "Bakinga tajna",
+  "username": "steve_wilson",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e527f"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fce"
+  },
+  "date": "2024-07-06",
+  "time": "18:30",
+  "description": "Casual dinner",
+  "guests": 4,
+  "restaurantName": "Bakinga tajna",
+  "username": "nancy_drew",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e5280"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fcf"
+  },
+  "date": "2024-07-07",
+  "time": "20:30",
+  "description": "Graduation party",
+  "guests": 10,
+  "restaurantName": "Bakinga tajna",
+  "username": "alex_king",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e5281"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fd0"
+  },
+  "date": "2024-07-08",
+  "time": "17:00",
+  "description": "Date night",
+  "guests": 2,
+  "restaurantName": "Bakinga tajna",
+  "username": "lisa_martin",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e5282"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fd1"
+  },
+  "date": "2024-07-09",
+  "time": "19:45",
+  "description": "Friend meetup",
+  "guests": 6,
+  "restaurantName": "Bakinga tajna",
+  "username": "paul_harris",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e5283"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fd2"
+  },
+  "date": "2024-07-10",
+  "time": "20:15",
+  "description": "Team dinner",
+  "guests": 7,
+  "restaurantName": "Bakinga tajna",
+  "username": "olivia_green",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e5284"
+  },
+  "waiterUsername": "kikow"
+},
+{
+  "_id": {
+    "$oid": "668947afa7357e3db0ea4fd3"
+  },
+  "date": "2024-07-11",
+  "time": "18:45",
+  "description": "Welcome party",
+  "guests": 5,
+  "restaurantName": "Bakinga tajna",
+  "username": "sarah_clark",
+  "status": "used",
+  "__v": 0,
+  "reason": "nema mesta",
+  "tableId": {
+    "$oid": "66892d5258d79363a79e5285"
+  },
+  "waiterUsername": "kikow"
+}]
