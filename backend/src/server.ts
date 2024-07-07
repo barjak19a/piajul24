@@ -330,7 +330,7 @@ router.post('/get-reservations', async (req, res) => {
 });
 
 router.post('/update-reservation', async (req, res) => {
-  const { _id, status, reason, tableId } = req.body;
+  const { _id, status, reason, tableId, waiterUsername } = req.body;
 
   try {
     let myReservation = await reservation.findById(_id);
@@ -345,6 +345,7 @@ router.post('/update-reservation', async (req, res) => {
       myReservation.reason = reason;
     } else {
       myReservation.tableId = tableId;
+      myReservation.waiterUsername = waiterUsername;
     }
 
     // Save updated reservation
