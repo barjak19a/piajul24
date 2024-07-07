@@ -4,6 +4,7 @@ import { UserService } from '../users.service';
 import { AuthService } from '../auth.service';
 import { Restaurant } from '../model/restaurant.model';
 import { RestaurantService } from '../restaurant.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-waiter',
@@ -15,11 +16,19 @@ export class AddWaiterComponent {
   restaurants: Restaurant[] = [];
   message: string = '';
 
-  constructor(private authService: AuthService, private restaurantService: RestaurantService) {
+  constructor(private authService: AuthService, private restaurantService: RestaurantService,private router: Router, private userService: UserService) {
     this.fetchAllRestaurants();
 
     this.waiter.role = 'waiter';
     this.waiter.status = 'approved';
+  }
+
+  ngOnInit(){
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'admin') {
+      this.router.navigate(['/adminlogin']);
+      return;
+    }
   }
 
   fetchAllRestaurants(): void {

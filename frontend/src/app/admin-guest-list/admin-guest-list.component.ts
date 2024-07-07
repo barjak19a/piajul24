@@ -17,6 +17,11 @@ export class AdminGuestListComponent {
   ) {}
 
   ngOnInit(): void {
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'admin') {
+      this.router.navigate(['/adminlogin']);
+      return;
+    }
     this.loadGuestUsers();
   }
 

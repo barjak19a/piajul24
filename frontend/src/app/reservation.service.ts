@@ -50,11 +50,11 @@ export class ReservationService {
   }
 
   getReservationsCountLast1Day() {
-    return this.http.get(`${this.apiUrl}/reservations-last-7-days`);
+    return this.http.get(`${this.apiUrl}/reservations-last-1-days`);
   }
 
   getReservationsCountLast7Days() {
-    return this.http.get(`${this.apiUrl}/reservations-last-1-days`);
+    return this.http.get(`${this.apiUrl}/reservations-last-7-days`);
   }
 
   getReservationsCountLast30Days() {

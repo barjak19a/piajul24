@@ -33,6 +33,11 @@ export class AcceptReservationComponent {
   ) {}
 
   ngOnInit() {
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'waiter') {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.route.params.subscribe(params => {
       const reservationId = params['reservationId']; // Assuming you have a route parameter for restaurant id
 

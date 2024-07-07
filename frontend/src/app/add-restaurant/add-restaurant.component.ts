@@ -1,7 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Restaurant } from '../model/restaurant.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from '../restaurant.service';
+import { UserService } from '../users.service';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -15,7 +16,15 @@ export class AddRestaurantComponent {
   message: string = "";
   messageSuccess: string = "";
 
-  constructor(private restaurantService: RestaurantService) {}
+  constructor(private restaurantService: RestaurantService, private router: Router, private userService: UserService) {}
+
+  ngOnInit(){
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'admin') {
+      this.router.navigate(['/adminlogin']);
+      return;
+    }
+  }
 
   onFileSelected(event: any): void {
     this.mapFile = event.target.files[0];

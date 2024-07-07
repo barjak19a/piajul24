@@ -3,6 +3,7 @@ import { Reservation } from '../model/reservation.model';
 import { ReservationService } from '../reservation.service';
 import { UserService } from '../users.service';
 import { User } from '../model/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-guest-reservations',
@@ -14,14 +15,18 @@ export class GuestReservationsComponent {
   username!: string; // Replace with actual username or fetch dynamically
   user!: User;
 
-  constructor(private reservationService: ReservationService, private userService: UserService) {}
+  constructor(private reservationService: ReservationService, private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'guest') {
+      this.router.navigate(['/login']);
+      return;
+    }
     if(this.userService.currentUserValue != null) {
       this.user = this.userService.currentUserValue;
       this.username = this.user.username;
     }
-
     this.fetchReservations();
   }
 

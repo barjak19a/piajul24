@@ -21,6 +21,11 @@ export class AdminEditGuestComponent {
   ) {}
 
   ngOnInit(): void {
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'admin') {
+      this.router.navigate(['/adminlogin']);
+      return;
+    }
     this.route.params.subscribe(params => {
       const username = params['username'];
       this.userService.getUserByUsername(username).subscribe(

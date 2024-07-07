@@ -25,6 +25,11 @@ export class WaiterReservationsComponent {
   ) {}
 
   ngOnInit() {
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'waiter') {
+      this.router.navigate(['/login']);
+      return;
+    }
     if(this.userService.currentUserValue != null) {
       this.currentWaiter = this.userService.currentUserValue;
 

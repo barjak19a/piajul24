@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Rectangle, Restaurant, Table } from '../model/restaurant.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from '../restaurant.service';
 import { Reservation } from '../model/reservation.model';
 import { ReservationService } from '../reservation.service';
@@ -23,10 +23,16 @@ export class ShowRestaurantComponent {
     private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private reservationService: ReservationService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || !['guest', 'admin', 'waiter'].includes(currentUser.role)) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.route.params.subscribe(params => {
       const restaurantName = params['restaurantName']; 
 

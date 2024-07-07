@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Order } from '../model/order.model';
 import { OrderService } from '../order.service';
 import { UserService } from '../users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-guest-orders',
@@ -12,9 +13,14 @@ export class GuestOrdersComponent {
   orders: Order[] = [];
   username = '';
 
-  constructor(private orderService: OrderService, private userService: UserService) {}
+  constructor(private orderService: OrderService, private userService: UserService,private router: Router) {}
 
   ngOnInit(): void {
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'guest') {
+      this.router.navigate(['/login']);
+      return;
+    }
     if(this.userService.currentUserValue != null) {
       this.username = this.userService.currentUserValue.username;
     }

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } fr
 import { ReservationService } from '../reservation.service';
 import { UserService } from '../users.service';
 import { Chart } from 'chart.js/auto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-waiter-stats',
@@ -20,7 +21,7 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
   @ViewChild('barChart') barChartCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('pieChart') pieChartCanvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('histogramChart') histogramChartCanvas!: ElementRef<HTMLCanvasElement>;
-  constructor(private reservationService: ReservationService, private userService: UserService, private renderer: Renderer2) { }
+  constructor(private reservationService: ReservationService, private userService: UserService, private renderer: Renderer2, private router: Router) { }
 
   ngAfterViewInit(): void {
       this.renderBarChart();
@@ -29,6 +30,11 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    const currentUser = this.userService.currentUserValue;
+    if (!currentUser || currentUser.role !== 'waiter') {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.waiterUsername = this.userService.currentUserValue!.username;
     this.getTotalGuestsByWaiter();
     this.getWaiterGuests();
