@@ -11,21 +11,24 @@ import { Chart } from 'chart.js/auto';
 export class WaiterStatsComponent implements OnInit, AfterViewInit {
   waiterUsername = '';
   totalGuestsByDate: { _id: string, totalGuests: number }[] = [];
-  chart: any;
+  barChart: any;
+  pieChart: any;
   waiterGuests: any[] = [];
   averageReservationsPerDay: any;
 
-  @ViewChild('guestChart') guestChartCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('barChart') barChartCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('pieChart') pieChartCanvas!: ElementRef<HTMLCanvasElement>;
   constructor(private reservationService: ReservationService, private userService: UserService, private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {
-      this.renderChart();
+      this.renderBarChart();
+      this.createPieChart(this.waiterGuests);
   }
 
   ngOnInit(): void {
     this.waiterUsername = this.userService.currentUserValue!.username;
     this.getTotalGuestsByWaiter();
-    //this.getWaiterGuests();
+    this.getWaiterGuests();
     //this.fetchAverageReservationsPerDay();
     //this.renderChart();
   }
@@ -36,7 +39,7 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
         (response) => {
           this.totalGuestsByDate = response;
           console.log(response);
-          this.renderChart();
+          this.renderBarChart();
         },
         (error) => {
           console.error('Error fetching total guests:', error);
@@ -44,19 +47,19 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
       );
   }
 
-  renderChart(): void {
-    if (this.chart) {
-      this.chart.destroy();
+  renderBarChart(): void {
+    if (this.barChart) {
+      this.barChart.destroy();
     }
 
     const labels = this.generateLast10Days();
     const data = this.generateDataForChart(labels);
 
-    const canvas = this.guestChartCanvas.nativeElement;
+    const canvas = this.barChartCanvas.nativeElement;
     if (canvas) {
       const ctx = canvas.getContext('2d');
       if (ctx) {
-        this.chart = new Chart(ctx, {
+        this.barChart = new Chart(ctx, {
           type: 'bar',
           data: {
             labels: labels,
@@ -78,38 +81,6 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
         });
       }
     }
-  }
-  
-  
-
-  createChart(){
-  
-    this.chart = new Chart("guestChart", {
-      type: 'line', //this denotes tha type of chart
-
-      data: {// values on X-Axis
-        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
-	       datasets: [
-          {
-            label: "Sales",
-            data: ['467','576', '572', '79', '92',
-								 '574', '573', '576'],
-            backgroundColor: 'blue'
-          },
-          {
-            label: "Profit",
-            data: ['542', '542', '536', '327', '17',
-									 '0.00', '538', '541'],
-            backgroundColor: 'limegreen'
-          }  
-        ]
-      },
-      options: {
-        aspectRatio:2.5
-      }
-      
-    });
   }
 
   generateLast10Days(): string[] {
@@ -139,6 +110,7 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
       data => {
         this.waiterGuests = data;
         console.log(data);
+        this.createPieChart(this.waiterGuests);
       },
       error => {
         console.error('Error fetching waiter guests:', error);
@@ -157,5 +129,66 @@ export class WaiterStatsComponent implements OnInit, AfterViewInit {
         // Handle error as per your application's requirement
       }
     );
+  }
+
+
+  createPieChart(data: any): void {
+    if (this.pieChart) {
+      this.pieChart.destroy();
+    }
+
+    const labels = data.map((item: any) => item._id);
+    const values = data.map((item: any) => item.totalGuests);
+
+    const canvas = this.pieChartCanvas.nativeElement;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        this.pieChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Number of Guests',
+                data: values,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(tooltipItem: any) {
+                    return tooltipItem.label + ': ' + tooltipItem.raw;
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+    }
   }
 }
