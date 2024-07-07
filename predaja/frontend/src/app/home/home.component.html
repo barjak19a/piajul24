@@ -1,0 +1,43 @@
+<div class="container">
+        <h3>Total number of restaurants {{restaurantCount}}</h3>
+        <h3>Total number of guests {{guestUsersCount}}</h3>
+        <h4>Number of reservations in the last 1 day {{reservationsLastDay}}</h4>
+        <h4>Number of reservations in the last 7 days {{reservationsLast7Days}}</h4>
+        <h4>Number of reservations in the last 30 days {{reservationsLast30Days}}</h4>
+    
+        <div>
+            <div *ngIf="restaurants.length > 0">
+              <h3>List of Restaurants</h3>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>
+                      <span (click)="sortData('name')">Name</span>
+                      <input type="text" class="form-control" [(ngModel)]="filterName" (input)="filterRestaurants()" placeholder="Search by name">
+                    </th>
+                    <th>
+                      <span (click)="sortData('address')">Address</span>
+                      <input type="text" class="form-control" [(ngModel)]="filterAddress" (input)="filterRestaurants()" placeholder="Search by address">
+                    </th>
+                    <th>
+                      <span (click)="sortData('type')">Type</span>
+                      <input type="text" class="form-control" [(ngModel)]="filterType" (input)="filterRestaurants()" placeholder="Search by type">
+                    </th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let restaurant of filteredRestaurants">
+                    <td>{{ restaurant.name }}</td>
+                    <td>{{ restaurant.address }}</td>
+                    <td>{{ restaurant.type }}</td>
+                    <td *ngIf="isLoggedIn()"><a [routerLink]="['/show-restaurant', restaurant.name]">Details</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="restaurants.length === 0">
+              <p>No restaurants found.</p>
+            </div>
+          </div>
+</div>

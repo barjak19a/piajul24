@@ -1,0 +1,52 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <div class="card shadow">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-center mb-4">
+              <img [src]="currentUser?.profilePicture" class="rounded-circle img-thumbnail" alt="Profile Picture" style="width: 150px; height: 150px;">
+            </div>
+            <h2 class="text-center mb-4">{{ currentUser?.firstName }} {{ currentUser?.lastName }}</h2>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th scope="row">Username</th>
+                  <td>{{ currentUser?.username }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                  <td>{{ currentUser?.email }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Phone Number</th>
+                  <td>{{ currentUser?.phoneNumber }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Address</th>
+                  <td>{{ currentUser?.address }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Gender</th>
+                  <td>{{ currentUser?.gender }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Role</th>
+                  <td>{{ currentUser?.role }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Credit Card</th>
+                  <td>{{ currentUser?.creditCard }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <button class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
+              <p></p>
+              <button class="btn btn-primary" routerLink="/change-password">Change Password</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

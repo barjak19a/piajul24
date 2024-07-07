@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Kutak dobre hrane</a>
+    
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/">Home</a>
+      </li>
+      <!-- Add more links as needed -->
+    </ul>
+
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a class="nav-link" routerLink="/profile">Profile</a>
+      </li>
+
+      
+      <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+        <a class="nav-link" routerLink="/admin-guest-list">Guest List</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+        <a class="nav-link" routerLink="/pending-guests">Pending Guests</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+        <a class="nav-link" routerLink="/add-waiter">Add Waiter</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+        <a class="nav-link" routerLink="/add-restaurant">Add Restaurant</a>
+      </li>
+
+      <li class="nav-item" *ngIf="isLoggedIn() && isGuest()">
+        <a class="nav-link" routerLink="/">Restaurants</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isGuest()">
+        <a class="nav-link" routerLink="/guest-reservations">Reservations</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isGuest()">
+        <a class="nav-link" routerLink="/guest-orders">Delivery</a>
+      </li>
+
+      <li class="nav-item" *ngIf="isLoggedIn() && isWaiter()">
+        <a class="nav-link" routerLink="/waiter-reservations">Reservations</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isWaiter()">
+        <a class="nav-link" routerLink="/waiter-delivery">Delivery</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isWaiter()">
+        <a class="nav-link" routerLink="/waiter-stats">Statistics</a>
+      </li>
+
+      <li class="nav-item" *ngIf="!isLoggedIn()">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLoggedIn()">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+      
+      
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a class="nav-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

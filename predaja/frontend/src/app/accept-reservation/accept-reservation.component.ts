@@ -83,9 +83,11 @@ export class AcceptReservationComponent {
   drawRestaurantMap(): void {
     const ctx = this.mapCanvas.nativeElement.getContext('2d');
 
-    ctx!.fillStyle = '#D0D0D0'; 
+    // Fill the background with grey
+    ctx!.fillStyle = '#D0D0D0'; // Grey color
     ctx!.fillRect(0, 0, 800, 800);
   
+    // Draw tables as circles
     this.currentRestaurant.map.tables.forEach((table: Table) => {
       ctx!.beginPath();
       ctx!.arc(table.x, table.y, table.radius, 0, Math.PI * 2);
@@ -100,12 +102,6 @@ export class AcceptReservationComponent {
 
       ctx!.fill();
       ctx!.closePath();
-
-      ctx!.font = '12px Arial';
-      ctx!.fillStyle = 'white';
-      ctx!.textAlign = 'center';
-      ctx!.textBaseline = 'middle';
-      ctx!.fillText(table.numberOfTableSeats.toString(), table.x, table.y);
     });
   
     // Draw bathrooms as rectangles

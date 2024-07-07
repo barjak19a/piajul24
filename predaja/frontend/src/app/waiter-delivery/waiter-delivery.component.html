@@ -1,0 +1,36 @@
+<!-- pending-orders.component.html -->
+
+<div class="container">
+    <h2>Pending Orders</h2>
+  
+    <div *ngIf="orders.length > 0; else noOrders">
+      <div class="card mb-3" *ngFor="let order of orders">
+        <div class="card-body">
+          <h5 class="card-title">{{ order.restaurantName }} Order</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let item of order.foods">
+              {{ item.food.name }} - Quantity: {{ item.quantity }} - Price: {{ item.food.price | currency }}
+            </li>
+          </ul>
+          <p><strong>Total Price:</strong> {{ calculateTotalPrice(order.foods) | currency }}</p>
+  
+          <div class="form-group">
+            <label for="deliveryTime{{ order._id }}">Delivery Time:</label>
+            <select id="deliveryTime{{ order._id }}" class="form-control" [(ngModel)]="order.deliveryTime">
+              <option value="20-30">20-30 min</option>
+              <option value="30-40">30-40 min</option>
+              <option value="40-50">40-50 min</option>
+            </select>
+          </div>
+  <br> 
+          <button class="btn btn-success mr-2" (click)="acceptOrder(order)">Accept Order</button> 
+          <button class="btn btn-danger m-2" (click)="declineOrder(order)">Decline Order</button>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #noOrders>
+      <p>No pending orders available.</p>
+    </ng-template>
+  </div>
+  

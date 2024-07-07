@@ -1,0 +1,45 @@
+<div class="container" style="width: 80%;">
+    <h1>Approved Guests</h1>
+    
+    <div *ngIf="users.length > 0">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Profile Picture</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Credit Card</th>
+            <th>Role</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td><img src="{{ user.profilePicture }}" alt="Profile" width="50" height="50" class="rounded-circle"></td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.gender }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.phoneNumber }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.creditCard }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                <button class="btn btn-primary" [routerLink]="['/admin-edit-guest', user.username]">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="users.length === 0">
+      <p>No approved guest users found.</p>
+    </div>
+  </div>
+  

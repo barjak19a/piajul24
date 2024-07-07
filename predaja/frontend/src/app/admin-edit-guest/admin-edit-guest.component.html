@@ -1,0 +1,71 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <div class="card shadow">
+          <div class="card-body p-4">
+            <h2 class="text-center mb-4">Edit Profile</h2>
+            <form (submit)="saveProfile()">
+                <div class="mb-3">
+                    <label class="form-label">Profile Picture</label>
+                    <div class="d-flex align-items-center">
+                      <img [src]="editedUser.profilePicture" class="rounded-circle me-3" alt="Profile Picture" style="width: 100px; height: 100px;">
+                      <div>
+                        <input type="file" class="form-control" id="profilePicture" name="profilePicture" accept="image/jpeg, image/png" (change)="onFileSelected($event)">
+                        <small class="text-muted">Select a JPEG or PNG file (Max: 5MB)</small>
+                      </div>
+                    </div>
+                  </div>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" [(ngModel)]="editedUser.username" disabled>
+              </div>
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="editedUser.firstName">
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="editedUser.lastName">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="male" name="gender" value="Male" [(ngModel)]="editedUser.gender">
+                    <label class="form-check-label" for="male">Male</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="female" name="gender" value="Female" [(ngModel)]="editedUser.gender">
+                    <label class="form-check-label" for="female">Female</label>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" name="address" [(ngModel)]="editedUser.address">
+              </div>
+              <div class="mb-3">
+                <label for="phoneNumber" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" [(ngModel)]="editedUser.phoneNumber">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="editedUser.email">
+              </div>
+              <div class="mb-3">
+                <label for="creditCard" class="form-label">Credit Card</label>
+                <input type="text" class="form-control" id="creditCard" name="creditCard" [(ngModel)]="editedUser.creditCard">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary" (onClick)="saveProfile()">Save Changes</button>
+              </div>
+            </form>
+            <div class="mt-4 text-danger">
+                <p>{{message}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

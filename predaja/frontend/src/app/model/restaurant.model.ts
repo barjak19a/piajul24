@@ -4,7 +4,6 @@ export class Table {
   y!: number;
   radius!: number;
   status?: string;
-  numberOfTableSeats!: number;
 }
 
 export class Rectangle {

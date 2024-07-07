@@ -5,8 +5,7 @@ const Schema = mongoose.Schema;
 const TableSchema = new Schema({
     x: { type: Number, required: true },
     y: { type: Number, required: true },
-    radius: { type: Number, required: true },
-    numberOfTableSeats: { type: Number, required: true }
+    radius: { type: Number, required: true }
 });
 
 const RectangleSchema = new Schema({

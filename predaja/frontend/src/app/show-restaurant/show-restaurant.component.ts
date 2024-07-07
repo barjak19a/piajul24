@@ -58,12 +58,6 @@ export class ShowRestaurantComponent {
       ctx!.fillStyle = 'blue'; // Example color, customize as needed
       ctx!.fill();
       ctx!.closePath();
-
-      ctx!.font = '12px Arial';
-    ctx!.fillStyle = 'white'; // Example color, adjust as needed
-    ctx!.textAlign = 'center';
-    ctx!.textBaseline = 'middle';
-    ctx!.fillText(table.numberOfTableSeats.toString(), table.x, table.y);
     });
   
     // Draw bathrooms as rectangles
