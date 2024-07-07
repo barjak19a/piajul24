@@ -28,7 +28,7 @@ export class GuestReservationsComponent {
   fetchReservations(): void {
     this.reservationService.getReservationsByUser(this.username)
       .subscribe(reservations => {
-        this.reservations = reservations;
+        this.reservations = reservations.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());;
       }, error => {
         console.error('Error fetching reservations:', error);
       });

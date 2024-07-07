@@ -51,7 +51,7 @@ export class WaiterReservationsComponent {
 
   private refreshReservations() {
     this.reservationService.fetchReservationsForRestaurant(this.currentWaiter.restaurantName).subscribe((response: any) => {
-      this.pendingReservations = response;
+      this.pendingReservations = (response as Reservation[]).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     }, error => {
       console.error('Error fetching reservations:', error);
     });
@@ -77,7 +77,7 @@ export class WaiterReservationsComponent {
 
   getCurrentReservations() {
     this.reservationService.getCurrentReservations(this.currentWaiter.restaurantName).subscribe((response: any) => {
-      this.currentReservations = response as Reservation[];
+      this.currentReservations = (response as Reservation[]).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     });
   }
 
